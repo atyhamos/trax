@@ -5,14 +5,17 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { StudentsProvider } from './contexts/StudentsContext'
+import { VolunteersProvider } from './contexts/VolunteersContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <StudentsProvider>
-        <App />
-      </StudentsProvider>
+      <VolunteersProvider>
+        <StudentsProvider>
+          <App />
+        </StudentsProvider>
+      </VolunteersProvider>
     </BrowserRouter>
   </React.StrictMode>
 )

@@ -1,4 +1,4 @@
-.student-preview-container {
+.person-preview-container {
   font-size: 1.5rem;
   margin-bottom: 0.5em;
   display: flex;
@@ -12,8 +12,8 @@
   color: black;
 }
 
-.student-preview-container:hover,
-.student-preview-container:focus {
+.person-preview-container:hover,
+.person-preview-container:focus {
   background-color: rgba(187, 186, 186, 0.61);
   cursor: pointer;
   scale: 1.05;

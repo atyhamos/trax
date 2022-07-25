@@ -9,7 +9,7 @@ const Student = () => {
   const { name, level, feedbackList } = studentsMap.get(studentId)
   return (
     <div className='student-container'>
-      <img src={BlankPicture} />
+      <img src={BlankPicture} alt={name} />
       <h2>
         {name} - {level}
       </h2>

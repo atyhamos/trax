@@ -1,5 +1,5 @@
 import './StudentList.component.scss'
-import StudentPreview from '../student-preview/StudentPreview.component'
+import PersonPreview from '../person-preview/PersonPreview.component'
 import { useContext } from 'react'
 import { StudentsContext } from '../../contexts/StudentsContext'
 
@@ -15,7 +15,7 @@ const StudentList = () => {
 
       <div className='table-container'>
         {students.map((student) => (
-          <StudentPreview key={student.id} student={student} />
+          <PersonPreview key={student.id} person={student} />
         ))}
       </div>
     </div>
