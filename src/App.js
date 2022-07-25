@@ -7,10 +7,10 @@ import Students from './routes/students/Students.component'
 function App() {
   return (
     <Routes>
-      <Route index element={<Login />}></Route>
+      <Route index element={<Login />} />
       <Route path='dashboard' element={<Dashboard />} />
       <Route path='volunteers' element={<Volunteers />} />
-      <Route path='students' element={<Students />} />
+      <Route path='students/*' element={<Students />} />
     </Routes>
   )
 }
