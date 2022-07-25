@@ -1,0 +1,46 @@
+.login-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 2.6rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+
+    input {
+      margin: 0.3em 0;
+      height: 4em;
+      padding: 0.2em;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    button {
+      padding: 0.7em;
+      margin-top: 0.3em;
+      cursor: pointer;
+      background-color: rgb(175, 45, 28);
+      font-weight: bold;
+      color: white;
+      font-size: 1.4rem;
+      border: 1px solid black;
+      scale: 1;
+      transition: scale 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    button:hover,
+    button:focus {
+      background-color: rgb(255, 0, 0);
+      scale: 1.05;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+.dashboard-container {
+  margin: 0 auto;
+  margin-top: 5em;
+  width: 90%;
+  max-width: 90%;
+  @media (min-width: 767px) {
+  }
+  h1 {
+    font-size: 3em;
+    text-align: center;
+    span {
+      position: relative;
+    }
+    span:before {
+      position: absolute;
+      content: '';
+      height: 0.3em;
+      bottom: 0.05em;
+      z-index: -1;
+      background-color: rgb(255, 0, 0);
+      width: 70%;
+    }
+  }
+}
+
+.preview-containers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  background: rgba(0, 0, 0, 0.082);
+  justify-content: space-evenly;
+
+  @media (min-width: 767px) {
+    flex-direction: row;
+  }
+
+  .preview-container {
+    width: 90%;
+    height: 20vh;
+    max-width: 700px;
+    padding: 1em;
+    margin: 1em 0;
+    text-decoration: none;
+    color: black;
+
+    @media (min-width: 767px) {
+      width: 40%;
+    }
+
+    h3 {
+      text-transform: uppercase;
+      font-size: 1.6rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .preview-container:hover,
+  .preview-container:focus {
+    cursor: pointer;
+  }
+
+  .volunteers-preview {
+    background-color: rgba(240, 128, 128);
+  }
+  .volunteers-preview:hover,
+  .volunteers-preview:focus {
+    background-color: rgb(233, 67, 67);
+  }
+  .students-preview {
+    background-color: rgba(173, 216, 230);
+  }
+  .students-preview:hover,
+  .students-preview:focus {
+    background-color: rgb(131, 210, 236);
+  }
+}

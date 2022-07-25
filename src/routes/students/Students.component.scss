@@ -1,0 +1,37 @@
+.students-container {
+  margin: 0 auto;
+  width: 80%;
+  h2 {
+    font-size: 2.5rem;
+  }
+  h3 {
+    font-size: 1.6rem;
+  }
+  @media (min-width: 762px) {
+    max-width: 800px;
+    margin-left: auto;
+  }
+}
+
+.headings-container {
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 'name level';
+  padding: 0 1em;
+  background-color: rgba(250, 203, 150, 0.466);
+  margin-bottom: 1em;
+}
+
+.student-name-label {
+  grid-area: name;
+}
+.student-level-label {
+  grid-area: level;
+  text-align: right;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+}
