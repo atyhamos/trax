@@ -6,15 +6,15 @@
     "feedbackList": [
       {
         "description": "Gina is uncooperative today",
-        "date": "25 July 2022"
+        "date": "2022-07-25"
       },
       {
         "description": "Gina is well-behaved today",
-        "date": "18 July 2022"
+        "date": "2022-07-18"
       },
       {
         "description": "Gina is happy today :)",
-        "date": "11 July 2022"
+        "date": "2022-07-11"
       }
     ]
   },
@@ -25,15 +25,15 @@
     "feedbackList": [
       {
         "description": "Holly is uncooperative today",
-        "date": "25 July 2022"
+        "date": "2022-07-25"
       },
       {
         "description": "Holly is well-behaved today",
-        "date": "18 July 2022"
+        "date": "2022-07-18"
       },
       {
         "description": "Holly is happy today :)",
-        "date": "11 July 2022"
+        "date": "2022-07-11"
       }
     ]
   },
@@ -44,15 +44,15 @@
     "feedbackList": [
       {
         "description": "Iman is uncooperative today",
-        "date": "25 July 2022"
+        "date": "2022-07-25"
       },
       {
         "description": "Iman is well-behaved today",
-        "date": "18 July 2022"
+        "date": "2022-07-18"
       },
       {
         "description": "Iman is happy today :)",
-        "date": "11 July 2022"
+        "date": "2022-07-11"
       }
     ]
   },
@@ -63,15 +63,15 @@
     "feedbackList": [
       {
         "description": "Justin is uncooperative today",
-        "date": "25 July 2022"
+        "date": "2022-07-25"
       },
       {
         "description": "Justin is well-behaved today",
-        "date": "18 July 2022"
+        "date": "2022-07-18"
       },
       {
         "description": "Justin is happy today :)",
-        "date": "11 July 2022"
+        "date": "2022-07-11"
       }
     ]
   },
@@ -82,15 +82,15 @@
     "feedbackList": [
       {
         "description": "Kyle is uncooperative today",
-        "date": "25 July 2022"
+        "date": "2022-07-25"
       },
       {
         "description": "Kyle is well-behaved today",
-        "date": "18 July 2022"
+        "date": "2022-07-18"
       },
       {
         "description": "Kyle is happy today :)",
-        "date": "11 July 2022"
+        "date": "2022-07-11"
       }
     ]
   },
@@ -105,11 +105,11 @@
       },
       {
         "description": "Laura is well-behaved today",
-        "date": "18 July 2022"
+        "date": "2022-07-18"
       },
       {
         "description": "Laura is happy today :)",
-        "date": "11 July 2022"
+        "date": "2022-07-11"
       }
     ]
   }

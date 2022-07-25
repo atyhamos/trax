@@ -5,6 +5,7 @@ export const StudentsContext = createContext({
   students: [],
   setStudents: () => null,
   studentsMap: {},
+  addComment: () => null,
 })
 
 export const StudentsProvider = ({ children }) => {
@@ -14,14 +15,29 @@ export const StudentsProvider = ({ children }) => {
     studentsMapInitial.set(student.id, student)
   }
   const [studentsMap, setStudentsMap] = useState(studentsMapInitial)
+
   useEffect(() => {
     const studentsMap = new Map()
-    for (const student of STUDENTS) {
+    for (const student of students) {
       studentsMap.set(student.id, student)
     }
     setStudentsMap(studentsMap)
   }, [students])
-  const value = { students, setStudents, studentsMap }
+
+  const addComment = (studentId, description, date) => {
+    const student = studentsMap.get(studentId)
+    const studentComments = student.feedbackList
+    const newStudent = {
+      ...student,
+      feedbackList: [{ description, date }, ...studentComments],
+    }
+    const newStudents = students.map((student) =>
+      student.id === studentId ? newStudent : student
+    )
+    setStudents(newStudents)
+  }
+
+  const value = { students, setStudents, studentsMap, addComment }
   return (
     <StudentsContext.Provider value={value}>
       {children}
