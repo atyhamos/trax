@@ -2,168 +2,198 @@
   {
     "name": "Gina",
     "level": "P6",
-    "id": "1",
+    "id": 1,
+    "averageBehaviour": 3,
+    "averageAcademics": 4,
     "feedbackList": [
       {
         "description": "Gina is uncooperative today",
         "date": "2022-07-25",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 3
+        "behaviour": 3,
+        "academics": 4,
+        "id": 3,
+        "volunteer": "Amos"
       },
       {
         "description": "Gina is well-behaved today",
         "date": "2022-07-18",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 2
+        "behaviour": 3,
+        "academics": 4,
+        "id": 2,
+        "volunteer": "Amos"
       },
       {
         "description": "Gina is happy today :)",
         "date": "2022-07-11",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 1
+        "behaviour": 3,
+        "academics": 4,
+        "id": 1,
+        "volunteer": "Amos"
       }
     ]
   },
   {
     "name": "Holly",
     "level": "S1",
-    "id": "2",
+    "id": 2,
+    "averageBehaviour": 3,
+    "averageAcademics": 4,
     "feedbackList": [
       {
         "description": "Holly is uncooperative today",
         "date": "2022-07-25",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 3
+        "behaviour": 3,
+        "academics": 4,
+        "id": 3,
+        "volunteer": "Amos"
       },
       {
         "description": "Holly is well-behaved today",
         "date": "2022-07-18",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 2
+        "behaviour": 3,
+        "academics": 4,
+        "id": 2,
+        "volunteer": "Amos"
       },
       {
         "description": "Holly is happy today :)",
         "date": "2022-07-11",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 1
+        "behaviour": 3,
+        "academics": 4,
+        "id": 1,
+        "volunteer": "Amos"
       }
     ]
   },
   {
     "name": "Iman",
     "level": "P5",
-    "id": "3",
+    "id": 3,
+    "averageBehaviour": 3,
+    "averageAcademics": 4,
     "feedbackList": [
       {
         "description": "Iman is uncooperative today",
         "date": "2022-07-25",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 3
+        "behaviour": 3,
+        "academics": 4,
+        "id": 3,
+        "volunteer": "Amos"
       },
       {
         "description": "Iman is well-behaved today",
         "date": "2022-07-18",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 2
+        "behaviour": 3,
+        "academics": 4,
+        "id": 2,
+        "volunteer": "Amos"
       },
       {
         "description": "Iman is happy today :)",
         "date": "2022-07-11",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 1
+        "behaviour": 3,
+        "academics": 4,
+        "id": 1,
+        "volunteer": "Amos"
       }
     ]
   },
   {
     "name": "Justin",
     "level": "P1",
-    "id": "4",
+    "id": 4,
+    "averageBehaviour": 3,
+    "averageAcademics": 4,
     "feedbackList": [
       {
         "description": "Justin is uncooperative today",
         "date": "2022-07-25",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 3
+        "behaviour": 3,
+        "academics": 4,
+        "id": 3,
+        "volunteer": "Amos"
       },
       {
         "description": "Justin is well-behaved today",
         "date": "2022-07-18",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 2
+        "behaviour": 3,
+        "academics": 4,
+        "id": 2,
+        "volunteer": "Amos"
       },
       {
         "description": "Justin is happy today :)",
         "date": "2022-07-11",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 1
+        "behaviour": 3,
+        "academics": 4,
+        "id": 1,
+        "volunteer": "Amos"
       }
     ]
   },
   {
     "name": "Kyle",
     "level": "P4",
-    "id": "5",
+    "id": 5,
+    "averageBehaviour": 3,
+    "averageAcademics": 4,
     "feedbackList": [
       {
         "description": "Kyle is uncooperative today",
         "date": "2022-07-25",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 3
+        "behaviour": 3,
+        "academics": 4,
+        "id": 3,
+        "volunteer": "Amos"
       },
       {
         "description": "Kyle is well-behaved today",
         "date": "2022-07-18",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 2
+        "behaviour": 3,
+        "academics": 4,
+        "id": 2,
+        "volunteer": "Amos"
       },
       {
         "description": "Kyle is happy today :)",
         "date": "2022-07-11",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 1
+        "behaviour": 3,
+        "academics": 4,
+        "id": 1,
+        "volunteer": "Amos"
       }
     ]
   },
   {
     "name": "Laura",
     "level": "P2",
-    "id": "6",
+    "id": 6,
+    "averageBehaviour": 3,
+    "averageAcademics": 4,
     "feedbackList": [
       {
         "description": "Laura is uncooperative today",
         "date": "25 July 2022",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 3
+        "behaviour": 3,
+        "academics": 4,
+        "id": 3,
+        "volunteer": "Amos"
       },
       {
         "description": "Laura is well-behaved today",
         "date": "2022-07-18",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 2
+        "behaviour": 3,
+        "academics": 4,
+        "id": 2,
+        "volunteer": "Amos"
       },
       {
         "description": "Laura is happy today :)",
         "date": "2022-07-11",
-        "behaviour": "3",
-        "academics": "4",
-        "id": 1
+        "behaviour": 3,
+        "academics": 4,
+        "id": 1,
+        "volunteer": "Amos"
       }
     ]
   }

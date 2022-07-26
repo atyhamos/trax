@@ -3,58 +3,6 @@
   max-width: 800px;
 }
 
-.description {
-  width: 50%;
-}
-
-.behaviour,
-.academics,
-.date {
-  position: relative;
-}
-
-.behaviour:before,
-.academics:before,
-.date:before {
-  visibility: hidden;
-  opacity: 0;
-  width: 140px;
-  background-color: rgba(0, 0, 0, 0.493);
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px 0;
-  transition: opacity 0.25s ease-in-out;
-
-  position: absolute;
-  z-index: 1;
-  left: -100%;
-  top: 130%;
-}
-
-.behaviour:hover:before,
-.academics:hover:before,
-.date:hover:before {
-  opacity: 1;
-  visibility: visible;
-}
-
-.behaviour:before {
-  content: 'Behaviour';
-}
-
-.academics:before {
-  content: 'Academics';
-}
-
-.date:before {
-  content: 'Date of comment';
-}
-
-.date {
-  width: 20%;
-}
-
 .student-feedback {
   display: flex;
   //   align-items: center;
@@ -65,19 +13,43 @@
   font-size: 1.2rem;
   padding: 0.5em;
   margin-bottom: 1em;
-  p {
+  scale: 1;
+  transition: scale 0.25s;
+  .comment-author {
+    position: absolute;
+    top: 5%;
+  }
+  .description {
     text-align: left;
+    max-width: 400px;
+    max-height: 8em;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow-y: hidden;
+  }
+  .description-full {
+    max-height: 100%;
   }
   span {
     color: grey;
     font-size: 0.8rem;
   }
-  scale: 1;
-  transition: scale 0.25s;
 }
 
 .student-feedback:hover,
 .student-feedback:focus {
   scale: 1.05;
   background-color: rgb(224, 224, 224);
+}
+
+.expand {
+  position: absolute;
+  bottom: 2%;
+  left: 45%;
+  cursor: pointer;
+}
+
+.expand:hover,
+.expand:focus {
+  color: rgb(21, 240, 167);
 }

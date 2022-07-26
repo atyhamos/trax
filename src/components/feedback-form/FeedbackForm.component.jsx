@@ -3,15 +3,15 @@ import './FeedbackForm.component.scss'
 import { useContext } from 'react'
 import { StudentsContext } from '../../contexts/StudentsContext'
 
-const initialFormData = {
-  behaviour: '',
-  academics: '',
+const defaultFormData = {
+  behaviour: '3',
+  academics: '3',
   comment: '',
-  date: new Date(),
+  date: new Date().toISOString().slice(0, 10), // today's date
 }
 
 const FeedbackForm = ({ name, id, closeModal, children }) => {
-  const [formData, setFormData] = useState(initialFormData)
+  const [formData, setFormData] = useState(defaultFormData)
   const { addFeedback: addComment } = useContext(StudentsContext)
   const { behaviour, academics, comment, date } = formData
   const handleSubmit = (e) => {
@@ -19,6 +19,7 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
     addComment(id, comment, behaviour, academics, date)
     closeModal()
   }
+  console.log(date)
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData({ ...formData, [name]: value })
@@ -32,7 +33,13 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
       <form onSubmit={handleSubmit}>
         <div className='input-container'>
           <label htmlFor='date'>Date</label>
-          <input type='date' value={date} name='date' onChange={handleChange} />
+          <input
+            type='date'
+            required
+            value={date}
+            name='date'
+            onChange={handleChange}
+          />
         </div>
         <div className='input-container'>
           <label htmlFor='behaviour'>Behaviour</label>

@@ -6,9 +6,14 @@
   justify-content: center;
   height: 100vh;
   img {
-    width: 40%;
-    min-width: 300px;
-    max-width: 450px;
+    width: 350px;
+  }
+  .average-score {
+    margin-bottom: 1em;
+    font-size: 1.25rem;
+    span {
+      font-weight: bold;
+    }
   }
 }
 
@@ -26,6 +31,58 @@
   }
 }
 
+.description {
+  width: 50%;
+}
+
+.date {
+  width: 20%;
+}
+
+.behaviour,
+.academics,
+.date {
+  position: relative;
+}
+
+.behaviour:before,
+.academics:before,
+.date:before {
+  visibility: hidden;
+  opacity: 0;
+  width: 140px;
+  background-color: rgba(0, 0, 0, 0.493);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity 0.25s ease-in-out;
+
+  position: absolute;
+  z-index: 1;
+  left: -100%;
+  top: 130%;
+}
+
+.behaviour:hover:before,
+.academics:hover:before,
+.date:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.behaviour:before {
+  content: 'Behaviour';
+}
+
+.academics:before {
+  content: 'Academics';
+}
+
+.date:before {
+  content: 'Date of comment';
+}
+
 .student-feedback-button {
   color: black;
   background-color: rgba(250, 203, 150, 0.466);
@@ -35,6 +92,7 @@
   cursor: pointer;
   font-weight: 700;
   transition: background-color 100ms;
+  margin-bottom: 1.2em;
 }
 
 .student-feedback-button:hover,
@@ -55,7 +113,7 @@
   background: rgba(0, 0, 0, 0.404);
 }
 
-.back-form-button {
+.close-form-button {
   margin-left: auto;
   position: relative;
   font-size: 1.2rem;
@@ -63,4 +121,10 @@
   span {
     font-size: 1rem;
   }
+}
+
+.close-form-button:hover,
+.close-form-button:focus {
+  background: red;
+  color: white;
 }

@@ -32,10 +32,18 @@
       padding: 0.6em 0.7em;
       width: 300px;
       margin: 1.6rem auto 1rem auto;
+      border: 1px solid black;
       font-size: 1.1rem;
       background: black;
       color: white;
+      font-weight: 700;
       cursor: pointer;
+      transition: background-color 100ms;
+    }
+    button:hover,
+    button:focus {
+      color: black;
+      background-color: rgba(250, 203, 150, 0.466);
     }
   }
 }

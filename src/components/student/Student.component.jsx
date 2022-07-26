@@ -10,8 +10,9 @@ const Student = () => {
   const { studentsMap } = useContext(StudentsContext)
   const [isWritingFeedback, setIsWritingFeedback] = useState(false)
   const studentId = useParams().id
-  const student = studentsMap.get(studentId)
-  const { name, id, level, feedbackList } = student
+  const student = studentsMap.get(parseInt(studentId))
+  const { name, id, level, feedbackList, averageBehaviour, averageAcademics } =
+    student
   const toggleForm = () => setIsWritingFeedback(!isWritingFeedback)
 
   return (
@@ -19,7 +20,7 @@ const Student = () => {
       {isWritingFeedback && (
         <div className='modal'>
           <FeedbackForm name={name} id={id} closeModal={toggleForm}>
-            <span className='back-form-button' onClick={toggleForm}>
+            <span className='close-form-button' onClick={toggleForm}>
               &#10005; <span>Close Form</span>
             </span>
           </FeedbackForm>
@@ -30,6 +31,15 @@ const Student = () => {
         <h2>
           {name} - {level}
         </h2>
+        <div className='average-score'>
+          👍Behaviour: <span>{averageBehaviour.toFixed(2)}/5</span>
+        </div>
+        <div className='average-score'>
+          📚Academics: <span>{averageAcademics.toFixed(2)}/5</span>
+        </div>
+        <button className='student-feedback-button' onClick={toggleForm}>
+          Write feedback
+        </button>
         <div className='student-feedback-container'>
           <div className='student-feedback-header'>
             <span className='description'>Comments✍️</span>
@@ -38,15 +48,9 @@ const Student = () => {
             <span className='date'>📅</span>
           </div>
           {feedbackList.map((feedback) => (
-            <Feedback
-              key={`${feedback.name} ${feedback.id}`}
-              feedback={feedback}
-            />
+            <Feedback key={`${name} ${feedback.id}`} feedback={feedback} />
           ))}
         </div>
-        <button className='student-feedback-button' onClick={toggleForm}>
-          Write feedback
-        </button>
       </div>
     </div>
   )
