@@ -17,7 +17,8 @@
   transition: scale 0.25s;
   .comment-author {
     position: absolute;
-    top: 5%;
+    top: 0;
+    margin-top: 0.5em;
   }
   .description {
     text-align: left;

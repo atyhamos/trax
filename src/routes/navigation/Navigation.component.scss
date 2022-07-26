@@ -1,0 +1,38 @@
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1em;
+  border: 1px solid black;
+  background: #000;
+}
+
+.nav-bar > * {
+  text-decoration: none;
+  margin-right: 1.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: white;
+}
+
+.nav-bar > *:hover,
+.nav-bar > *:focus {
+  .nav-bar-hover:before {
+    display: block;
+  }
+}
+
+.nav-bar-hover {
+  position: relative;
+}
+
+.nav-bar-hover:before {
+  display: none;
+  position: absolute;
+  content: '';
+  height: 0.3em;
+  bottom: -0.05em;
+  z-index: 1;
+  background-color: rgb(255, 0, 0);
+  width: 70%;
+}
