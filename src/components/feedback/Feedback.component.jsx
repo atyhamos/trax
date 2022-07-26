@@ -22,7 +22,7 @@ const Feedback = ({ feedback }) => {
       <span className='date'>{date}</span>
       {description.length > 50 && (
         <span className='expand' onClick={expandHandler}>
-          see more...
+          {isExpanded ? '' : 'see more...'}
         </span>
       )}
     </div>

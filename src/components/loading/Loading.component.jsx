@@ -1,8 +1,8 @@
 import './Loading.component.scss'
 
-const Loading = () => {
+export const SmallLoading = () => {
   return (
-    <div class='lds-ring'>
+    <div className='lds-ring'>
       <div></div>
       <div></div>
       <div></div>
@@ -11,4 +11,11 @@ const Loading = () => {
   )
 }
 
-export default Loading
+export const BigLoading = () => {
+  return (
+    <div className='loading-screen'>
+      <h1>Loading...</h1>
+      <SmallLoading />
+    </div>
+  )
+}

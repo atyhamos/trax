@@ -1,7 +1,7 @@
 .nav-bar {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 1em;
   border: 1px solid black;
   background: #000;
@@ -9,7 +9,7 @@
 
 .nav-bar > * {
   text-decoration: none;
-  margin-right: 1.3em;
+  margin: 0 1.3em;
   text-transform: uppercase;
   font-weight: 600;
   color: white;

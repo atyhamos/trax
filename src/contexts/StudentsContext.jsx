@@ -1,29 +1,26 @@
 import { createContext, useEffect, useState } from 'react'
-import STUDENTS from '../students.json'
+import {
+  addFeedbackToStudent,
+  getStudentsAndDocuments,
+} from '../utils/firebase/firebase.utils'
 
 export const StudentsContext = createContext({
-  students: [],
-  setStudents: () => null,
   studentsMap: {},
+  setStudentsMap: () => null,
   addFeedback: () => null,
 })
 
 export const StudentsProvider = ({ children }) => {
-  const [students, setStudents] = useState(STUDENTS)
   const studentsMapInitial = new Map()
-  for (const student of STUDENTS) {
-    studentsMapInitial.set(student.id, student)
-  }
   const [studentsMap, setStudentsMap] = useState(studentsMapInitial)
 
   useEffect(() => {
-    // Rebuild student map
-    const studentsMap = new Map()
-    for (const student of students) {
-      studentsMap.set(student.id, student)
+    const getStudentsMap = async () => {
+      const studentsMap = await getStudentsAndDocuments()
+      setStudentsMap(studentsMap)
     }
-    setStudentsMap(studentsMap)
-  }, [students])
+    getStudentsMap()
+  }, [])
 
   const calculateScores = (
     student,
@@ -60,7 +57,11 @@ export const StudentsProvider = ({ children }) => {
   const addFeedback = (studentId, description, behaviour, academics, date) => {
     const student = studentsMap.get(studentId)
     const studentComments = student.feedbackList
-    const id = studentComments.length + 1
+    const feedbackId = studentComments.length + 1
+    const feedbackList = [
+      { description, behaviour, academics, date, feedbackId },
+      ...studentComments,
+    ]
     const [averageBehaviour, averageAcademics] = calculateScores(
       student,
       studentComments,
@@ -70,21 +71,21 @@ export const StudentsProvider = ({ children }) => {
 
     const newStudent = {
       ...student,
-      feedbackList: [
-        { description, behaviour, academics, date, id },
-        ...studentComments,
-      ],
+      feedbackList,
       averageBehaviour,
       averageAcademics,
     }
-    console.log(newStudent)
-    const newStudents = students.map((student) =>
-      student.id === studentId ? newStudent : student
-    )
-    setStudents(newStudents)
+    addFeedbackToStudent(student, {
+      feedbackList,
+      averageBehaviour,
+      averageAcademics,
+    })
+    const newStudents = new Map(studentsMap)
+    newStudents.set(studentId, newStudent)
+    setStudentsMap(newStudents)
   }
 
-  const value = { students, setStudents, studentsMap, addFeedback }
+  const value = { studentsMap, addFeedback }
   return (
     <StudentsContext.Provider value={value}>
       {children}

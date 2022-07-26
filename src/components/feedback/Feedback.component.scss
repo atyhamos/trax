@@ -1,8 +1,3 @@
-.student-feedback-container {
-  width: 85%;
-  max-width: 800px;
-}
-
 .student-feedback {
   display: flex;
   //   align-items: center;
@@ -29,7 +24,7 @@
     overflow-y: hidden;
   }
   .description-full {
-    max-height: 100%;
+    max-height: auto;
   }
   span {
     color: grey;

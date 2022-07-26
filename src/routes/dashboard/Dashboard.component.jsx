@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom'
 import './Dashboard.component.scss'
 
 const Dashboard = () => {
-  
   return (
     <div className='dashboard-container'>
       <h1>
-        <span>Welcome,</span> User
+        <span>Welcome,</span> Volunteer
       </h1>
       <div className='preview-containers'>
         <Link className='preview-container volunteers-preview' to='/volunteers'>

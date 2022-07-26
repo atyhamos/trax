@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import './Login.component.scss'
 import { signInWithAuthEmailAndPassword } from '../../utils/firebase/firebase.utils'
 import { useContext, useState } from 'react'
-import Loading from '../../components/loading/Loading.component'
+import { SmallLoading } from '../../components/loading/Loading.component'
 import { UserContext } from '../../contexts/UserContext'
 
 const initialFormData = {
@@ -58,7 +58,7 @@ const Login = () => {
         <button className='button' type='submit' disabled={isLoading}>
           Login
         </button>
-        {isLoading && <Loading />}
+        {isLoading && <SmallLoading />}
       </form>
     </div>
   )

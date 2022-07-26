@@ -19,7 +19,6 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
     addComment(id, comment, behaviour, academics, date)
     closeModal()
   }
-  console.log(date)
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData({ ...formData, [name]: value })

@@ -4,6 +4,7 @@ import { StudentsContext } from '../../contexts/StudentsContext'
 import BlankPicture from '../../images/blank-profile.svg'
 import FeedbackForm from '../feedback-form/FeedbackForm.component'
 import Feedback from '../feedback/Feedback.component'
+import { BigLoading } from '../loading/Loading.component'
 import './Student.component.scss'
 
 const Student = () => {
@@ -11,8 +12,12 @@ const Student = () => {
   const [isWritingFeedback, setIsWritingFeedback] = useState(false)
   const studentId = useParams().id
   const student = studentsMap.get(parseInt(studentId))
+  if (!student) {
+    return <BigLoading />
+  }
   const { name, id, level, feedbackList, averageBehaviour, averageAcademics } =
     student
+
   const toggleForm = () => setIsWritingFeedback(!isWritingFeedback)
 
   return (
@@ -27,19 +32,21 @@ const Student = () => {
         </div>
       )}
       <div className='student-container'>
-        <img src={BlankPicture} alt={name} />
-        <h2>
-          {name} - {level}
-        </h2>
-        <div className='average-score'>
-          👍Behaviour: <span>{averageBehaviour.toFixed(2)}/5</span>
+        <div className='student-info-container'>
+          <img src={BlankPicture} alt={name} />
+          <h2>
+            {name} - {level}
+          </h2>
+          <div className='average-score'>
+            👍Behaviour: <span>{averageBehaviour.toFixed(2)}/5</span>
+          </div>
+          <div className='average-score'>
+            📚Academics: <span>{averageAcademics.toFixed(2)}/5</span>
+          </div>
+          <button className='student-feedback-button' onClick={toggleForm}>
+            Write feedback
+          </button>
         </div>
-        <div className='average-score'>
-          📚Academics: <span>{averageAcademics.toFixed(2)}/5</span>
-        </div>
-        <button className='student-feedback-button' onClick={toggleForm}>
-          Write feedback
-        </button>
         <div className='student-feedback-container'>
           <div className='student-feedback-header'>
             <span className='description'>Comments✍️</span>

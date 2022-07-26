@@ -6,7 +6,6 @@ import './Navigation.component.scss'
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext)
-  console.log(currentUser)
   return (
     <>
       {currentUser && (
