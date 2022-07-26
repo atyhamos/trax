@@ -12,11 +12,11 @@ const initialFormData = {
 
 const FeedbackForm = ({ name, id, closeModal, children }) => {
   const [formData, setFormData] = useState(initialFormData)
-  const { addComment } = useContext(StudentsContext)
+  const { addFeedback: addComment } = useContext(StudentsContext)
   const { behaviour, academics, comment, date } = formData
   const handleSubmit = (e) => {
     e.preventDefault()
-    addComment(id, comment, date)
+    addComment(id, comment, behaviour, academics, date)
     closeModal()
   }
   const handleChange = (event) => {

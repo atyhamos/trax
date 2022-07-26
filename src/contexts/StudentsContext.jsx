@@ -5,7 +5,7 @@ export const StudentsContext = createContext({
   students: [],
   setStudents: () => null,
   studentsMap: {},
-  addComment: () => null,
+  addFeedback: () => null,
 })
 
 export const StudentsProvider = ({ children }) => {
@@ -24,12 +24,15 @@ export const StudentsProvider = ({ children }) => {
     setStudentsMap(studentsMap)
   }, [students])
 
-  const addComment = (studentId, description, date) => {
+  const addFeedback = (studentId, description, behaviour, academics, date) => {
     const student = studentsMap.get(studentId)
     const studentComments = student.feedbackList
     const newStudent = {
       ...student,
-      feedbackList: [{ description, date }, ...studentComments],
+      feedbackList: [
+        { description, behaviour, academics, date },
+        ...studentComments,
+      ],
     }
     const newStudents = students.map((student) =>
       student.id === studentId ? newStudent : student
@@ -37,7 +40,7 @@ export const StudentsProvider = ({ children }) => {
     setStudents(newStudents)
   }
 
-  const value = { students, setStudents, studentsMap, addComment }
+  const value = { students, setStudents, studentsMap, addFeedback }
   return (
     <StudentsContext.Provider value={value}>
       {children}

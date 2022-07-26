@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { StudentsContext } from '../../contexts/StudentsContext'
 import BlankPicture from '../../images/blank-profile.svg'
 import FeedbackForm from '../feedback-form/FeedbackForm.component'
+import Feedback from '../feedback/Feedback.component'
 import './Student.component.scss'
 
 const Student = () => {
@@ -30,18 +31,18 @@ const Student = () => {
           {name} - {level}
         </h2>
         <div className='student-feedback-container'>
-          {feedbackList.map((feedback) => {
-            return (
-              <div
-                className='student-feedback'
-                tabIndex={0}
-                key={feedback.date}
-              >
-                <p>{feedback.description}</p>
-                <span>{feedback.date}</span>
-              </div>
-            )
-          })}
+          <div className='student-feedback-header'>
+            <span className='description'>Comments✍️</span>
+            <span className='behaviour'>👍</span>
+            <span className='academics'>📚</span>
+            <span className='date'>📅</span>
+          </div>
+          {feedbackList.map((feedback) => (
+            <Feedback
+              key={`${feedback.name} ${feedback.id}`}
+              feedback={feedback}
+            />
+          ))}
         </div>
         <button className='student-feedback-button' onClick={toggleForm}>
           Write feedback

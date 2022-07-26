@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import './Dashboard.component.scss'
 
 const Dashboard = () => {
+  
   return (
     <div className='dashboard-container'>
       <h1>
