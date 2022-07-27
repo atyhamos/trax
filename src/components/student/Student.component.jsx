@@ -54,9 +54,11 @@ const Student = () => {
             <span className='academics'>📚</span>
             <span className='date'>📅</span>
           </div>
-          {feedbackList.map((feedback) => (
-            <Feedback key={`${name} ${feedback.id}`} feedback={feedback} />
-          ))}
+          {feedbackList.map((feedback) => {
+            return (
+              <Feedback key={`${name} ${feedback.id}`} feedback={feedback} />
+            )
+          })}
         </div>
       </div>
     </div>

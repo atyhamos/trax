@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth'
 import {
   getFirestore,
@@ -64,16 +65,16 @@ export const addFeedbackToStudent = async (student, newData) => {
   await updateDoc(studentRef, newData)
 }
 
-export const getStudentsAndDocuments = async () => {
-  const studentsRef = collection(db, 'students')
-  const q = query(studentsRef)
+export const getPeopleAndDocuments = async (documentKey) => {
+  const documentRef = collection(db, documentKey)
+  const q = query(documentRef)
   const querySnapshot = await getDocs(q)
-  const studentMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+  const personsMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     const { id } = docSnapshot.data()
     acc.set(id, docSnapshot.data())
     return acc
   }, new Map())
-  return studentMap
+  return personsMap
 }
 
 export const signInWithAuthEmailAndPassword = (email, password) =>
@@ -109,4 +110,13 @@ export const signOutAuthUser = () =>
 
 export const onAuthStateChangedListener = (callback) => {
   onAuthStateChanged(auth, callback)
+}
+
+export const updateDisplayName = (name) => {
+  updateProfile(auth.currentUser, {
+    displayName: name,
+    photoURL: '',
+  })
+    .then(() => console.log('Display name updated!'))
+    .catch((error) => console.log(error))
 }

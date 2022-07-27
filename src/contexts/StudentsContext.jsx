@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import {
   addFeedbackToStudent,
-  getStudentsAndDocuments,
+  getPeopleAndDocuments,
 } from '../utils/firebase/firebase.utils'
 
 export const StudentsContext = createContext({
@@ -16,10 +16,11 @@ export const StudentsProvider = ({ children }) => {
 
   useEffect(() => {
     const getStudentsMap = async () => {
-      const studentsMap = await getStudentsAndDocuments()
+      const studentsMap = await getPeopleAndDocuments('students')
       setStudentsMap(studentsMap)
     }
     getStudentsMap()
+    console.log('Running useEffect: studentsMap')
   }, [])
 
   const calculateScores = (
@@ -57,9 +58,9 @@ export const StudentsProvider = ({ children }) => {
   const addFeedback = (studentId, description, behaviour, academics, date) => {
     const student = studentsMap.get(studentId)
     const studentComments = student.feedbackList
-    const feedbackId = studentComments.length + 1
+    const id = studentComments.length + 1
     const feedbackList = [
-      { description, behaviour, academics, date, feedbackId },
+      { description, behaviour, academics, date, id },
       ...studentComments,
     ]
     const [averageBehaviour, averageAcademics] = calculateScores(

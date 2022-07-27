@@ -1,6 +1,6 @@
 import './StudentList.component.scss'
 import PersonPreview from '../person-preview/PersonPreview.component'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { StudentsContext } from '../../contexts/StudentsContext'
 import { BigLoading } from '../loading/Loading.component'
 
