@@ -6,12 +6,12 @@ import { BigLoading } from '../loading/Loading.component'
 import './Volunteer.component.scss'
 
 const Volunteer = () => {
-  const { volunteersMap } = useContext(VolunteersContext)
+  const { volunteersIdMap } = useContext(VolunteersContext)
   const volunteerId = useParams().id
-  if (!volunteersMap.size) {
+  if (!volunteersIdMap.size) {
     return <BigLoading />
   }
-  const { name } = volunteersMap.get(parseInt(volunteerId))
+  const name = volunteersIdMap.get(Number(volunteerId)).name
   return (
     <div className='volunteer-container'>
       <img src={BlankPicture} alt={name} />

@@ -31,15 +31,22 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth()
 
 export const db = getFirestore()
+
 export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocRef = doc(db, 'users', userAuth.uid)
+  const userDocRef = doc(db, 'volunteers', userAuth.uid)
   const userSnapshot = await getDoc(userDocRef)
   if (!userSnapshot.exists()) {
     // Create document
     const { email } = userAuth
-    const createdAt = new Date()
+    const collectionRef = collection(db, 'volunteers')
+    const q = query(collectionRef)
+    const querySnapshot = await getDocs(q)
+    const id = querySnapshot.size + 1
+    const isAdmin = false
+    const name = email.split('@')[0]
     try {
-      await setDoc(userDocRef, { email, createdAt })
+      const docRef = doc(collectionRef, email)
+      await setDoc(docRef, { email, id, isAdmin, name })
     } catch (error) {
       console.log('Error creating user', error.message)
     }
@@ -66,15 +73,23 @@ export const addFeedbackToStudent = async (student, newData) => {
 }
 
 export const getPeopleAndDocuments = async (documentKey) => {
-  const documentRef = collection(db, documentKey)
-  const q = query(documentRef)
+  const collectionRef = collection(db, documentKey)
+  const q = query(collectionRef)
   const querySnapshot = await getDocs(q)
-  const personsMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+  if (documentKey === 'volunteers') {
+    const volunteersMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+      const { email } = docSnapshot.data()
+      acc.set(email, docSnapshot.data())
+      return acc
+    }, new Map())
+    return volunteersMap
+  }
+  const studentsMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     const { id } = docSnapshot.data()
     acc.set(id, docSnapshot.data())
     return acc
   }, new Map())
-  return personsMap
+  return studentsMap
 }
 
 export const signInWithAuthEmailAndPassword = (email, password) =>

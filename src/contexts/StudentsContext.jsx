@@ -32,9 +32,9 @@ export const StudentsProvider = ({ children }) => {
     if (student.averageAcademics && student.averageBehaviour) {
       // existing score, multiply for faster operation
       const totalBehaviourScore =
-        student.averageBehaviour * studentComments.length + Number(newBehaviour)
+        student.averageBehaviour * studentComments.length + newBehaviour
       const totalAcademicScore =
-        student.averageAcademics * studentComments.length + Number(newAcademics)
+        student.averageAcademics * studentComments.length + newAcademics
       const newAverageBehaviour =
         totalBehaviourScore / (studentComments.length + 1)
       const newAverageAcademics =
@@ -42,8 +42,8 @@ export const StudentsProvider = ({ children }) => {
       return [newAverageBehaviour, newAverageAcademics]
     } else {
       // calculate from scratch
-      let totalBehaviourScore = Number(newBehaviour)
-      let totalAcademicScore = Number(newAcademics)
+      let totalBehaviourScore = newBehaviour
+      let totalAcademicScore = newAcademics
       studentComments.forEach((feedback) => {
         totalBehaviourScore += feedback.behaviour
         totalAcademicScore += feedback.academics
@@ -55,12 +55,19 @@ export const StudentsProvider = ({ children }) => {
     }
   }
 
-  const addFeedback = (studentId, description, behaviour, academics, date) => {
+  const addFeedback = (
+    studentId,
+    description,
+    behaviour,
+    academics,
+    date,
+    volunteer
+  ) => {
     const student = studentsMap.get(studentId)
     const studentComments = student.feedbackList
     const id = studentComments.length + 1
     const feedbackList = [
-      { description, behaviour, academics, date, id },
+      { description, behaviour, academics, date, id, volunteer },
       ...studentComments,
     ]
     const [averageBehaviour, averageAcademics] = calculateScores(

@@ -9,19 +9,15 @@ import { updateDisplayName } from '../../utils/firebase/firebase.utils'
 const Dashboard = () => {
   const { volunteersMap } = useContext(VolunteersContext)
   const { currentUser } = useContext(UserContext)
-  if (!(currentUser && volunteersMap.size)) {
+  if (
+    !(currentUser && volunteersMap.size && volunteersMap.get(currentUser.email))
+  ) {
     return <BigLoading />
   }
-  let name = ''
-  if (!currentUser.displayName) {
+  const name = volunteersMap.get(currentUser.email).name
+  if (currentUser.displayName !== name) {
     // set displayName to current volunteer's name
-    const [id, volunteer] = Array.from(volunteersMap).find(
-      ([id, volunteer]) => volunteer.email === currentUser.email
-    )
-    updateDisplayName(volunteer.name)
-    name = volunteer.name
-  } else {
-    name = currentUser.displayName
+    updateDisplayName(name)
   }
   return (
     <div className='dashboard-container'>

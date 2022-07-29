@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './FeedbackForm.component.scss'
 import { useContext } from 'react'
 import { StudentsContext } from '../../contexts/StudentsContext'
+import { UserContext } from '../../contexts/UserContext'
 
 const defaultFormData = {
   behaviour: '3',
@@ -12,11 +13,19 @@ const defaultFormData = {
 
 const FeedbackForm = ({ name, id, closeModal, children }) => {
   const [formData, setFormData] = useState(defaultFormData)
-  const { addFeedback: addComment } = useContext(StudentsContext)
+  const { addFeedback } = useContext(StudentsContext)
+  const { currentUser } = useContext(UserContext)
   const { behaviour, academics, comment, date } = formData
   const handleSubmit = (e) => {
     e.preventDefault()
-    addComment(id, comment, behaviour, academics, date)
+    addFeedback(
+      id,
+      comment,
+      Number(behaviour),
+      Number(academics),
+      date,
+      currentUser.email // email is used as displayNames are mutable.
+    )
     closeModal()
   }
   const handleChange = (event) => {
