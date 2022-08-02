@@ -34,6 +34,9 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
   }
   return (
     <div className='form-container'>
+      <span className='close-form-button' onClick={closeModal}>
+        &#10005; <span>Close Form</span>
+      </span>
       {children}
 
       <h2>Feedback Form for {name}</h2>

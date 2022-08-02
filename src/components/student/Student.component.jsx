@@ -41,11 +41,7 @@ const Student = () => {
     <div>
       {isWritingFeedback && (
         <div className='modal'>
-          <FeedbackForm name={name} id={id} closeModal={toggleForm}>
-            <span className='close-form-button' onClick={toggleForm}>
-              &#10005; <span>Close Form</span>
-            </span>
-          </FeedbackForm>
+          <FeedbackForm name={name} id={id} closeModal={toggleForm} />
         </div>
       )}
       {isDeletingFeedback && (

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import {
   addFeedbackToStudent,
+  addStudentDocument,
   getStudents,
   updatePersonData,
 } from '../utils/firebase/firebase.utils'
@@ -11,6 +12,7 @@ export const StudentsContext = createContext({
   setStudentsMap: () => null,
   addFeedback: () => null,
   deleteFeedbackFromStudent: () => null,
+  addStudent: () => null,
 })
 
 export const StudentsProvider = ({ children }) => {
@@ -117,11 +119,20 @@ export const StudentsProvider = ({ children }) => {
     setStudentsMap(studentsMapInitial)
   }
 
+  const addStudent = (student, group) => {
+    addStudentDocument(student, group).then((newStudent) => {
+      const newStudentsMap = new Map(studentsMap.set(newStudent.id, newStudent))
+      console.log(newStudentsMap)
+      setStudentsMap(newStudentsMap)
+    })
+  }
+
   const value = {
     studentsMap,
     addFeedback,
     deleteFeedbackFromStudent,
     resetStudentsContext,
+    addStudent,
   }
   return (
     <StudentsContext.Provider value={value}>

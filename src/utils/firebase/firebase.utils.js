@@ -68,6 +68,34 @@ export const addCollectionAndDocuments = async (
   await batch.commit()
 }
 
+export const addStudentDocument = async (student, group) => {
+  const studentDocRef = doc(db, 'students', student.name)
+  const studentSnapshot = await getDoc(studentDocRef)
+  if (studentSnapshot.exists()) {
+    throw Error('Student already exists.')
+  }
+  const collectionRef = collection(db, 'students')
+  const q = query(collectionRef)
+  const querySnapshot = await getDocs(q)
+  const id = querySnapshot.size + 1
+  try {
+    const docRef = doc(collectionRef, student.name)
+    const studentData = {
+      ...student,
+      group,
+      id,
+      averageBehaviour: 0,
+      averageAcademics: 0,
+      feedbackList: [],
+    }
+    console.log(studentData)
+    await setDoc(docRef, studentData)
+    return studentData
+  } catch (error) {
+    console.log('Error creating user', error.message)
+  }
+}
+
 export const addFeedbackToStudent = async (student, newData) => {
   const studentRef = doc(db, 'students', student.name)
   await updateDoc(studentRef, newData)

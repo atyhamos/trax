@@ -1,8 +1,24 @@
 .person-container {
   margin: 0 auto;
   width: 80%;
-  h2 {
+  .student-list-header-container {
     font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    .add-student-button {
+      margin-left: 1em;
+      background: green;
+      color: white;
+      padding: 0.75em;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .add-student-button:hover,
+    .add-student-button:focus {
+      background: darkgreen;
+    }
   }
   h3 {
     font-size: 1.6rem;
