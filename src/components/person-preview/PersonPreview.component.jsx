@@ -1,33 +1,35 @@
 import { Link } from 'react-router-dom'
 import './PersonPreview.component.scss'
 
-const PersonPreview = ({ person, handleAccept, handleReject }) => {
+const PersonPreview = ({ person, request = [] }) => {
   const { name = null, email, level = false, id } = person
-
+  const [handleAccept, handleReject] = request
+  const isRequest = request.length > 0
+  const teacher = { email, id }
   // Avoid showing pointer on requests
   const linkStyles = {
-    cursor: `${name ? 'pointer' : 'auto'}`,
+    cursor: `${isRequest ? 'pointer' : 'auto'}`,
   }
 
   return (
     <Link
       // Disable link if is request
-      to={name ? id.toString() : ''}
+      to={isRequest ? '' : id.toString()}
       className='person-preview-container'
       tabIndex={0}
       style={linkStyles}
     >
       {/* If request, show email instead */}
-      <div>{name || email}</div>
+      <div>{isRequest ? email : name}</div>
 
       {/* For students, show level */}
       {level && <div>{level}</div>}
 
       {/* For requests */}
-      {!name && (
+      {isRequest && (
         <div>
-          <button onClick={() => handleAccept(person)}>Accept</button>
-          <button onClick={() => handleReject(person)}>Reject</button>
+          <button onClick={() => handleAccept(teacher)}>Accept</button>
+          <button onClick={() => handleReject(teacher)}>Reject</button>
         </div>
       )}
     </Link>

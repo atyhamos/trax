@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { StudentsContext } from '../../contexts/StudentsContext'
 import { TeachersContext } from '../../contexts/TeachersContext'
 import { UserContext } from '../../contexts/UserContext'
 import { signOutAuthUser } from '../../utils/firebase/firebase.utils'
@@ -7,10 +8,13 @@ import './Navigation.component.scss'
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext)
-  const { currentTeacher } = useContext(TeachersContext)
+  const { currentTeacher, resetTeachersContext } = useContext(TeachersContext)
+  const { resetStudentsContext } = useContext(StudentsContext)
   const navigate = useNavigate()
   const handleSignOut = () => {
     signOutAuthUser().then(() => {
+      resetStudentsContext()
+      resetTeachersContext()
       navigate('/')
     })
   }

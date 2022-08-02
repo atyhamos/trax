@@ -5,7 +5,7 @@ import { TeachersContext } from '../../contexts/TeachersContext'
 import { BigLoading } from '../loading/Loading.component'
 
 const TeacherList = () => {
-  const { teachersMap } = useContext(TeachersContext)
+  const { teachersMap, currentTeacher } = useContext(TeachersContext)
   return (
     <div className='students-container'>
       <h2>Teachers</h2>
@@ -14,9 +14,14 @@ const TeacherList = () => {
       </div>
       {!teachersMap.size && <BigLoading />}
       <div className='table-container'>
-        {Array.from(teachersMap).map(([id, teacher]) => (
-          <PersonPreview key={teacher.id} person={teacher} />
-        ))}
+        {currentTeacher &&
+          Array.from(teachersMap).map(([id, teacher]) => {
+            {
+              if (teacher.group !== currentTeacher.group) return
+              console.log(teacher)
+              return <PersonPreview key={teacher.id} person={teacher} />
+            }
+          })}
       </div>
     </div>
   )

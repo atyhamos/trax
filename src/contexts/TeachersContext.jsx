@@ -15,28 +15,33 @@ export const TeachersProvider = ({ children }) => {
   const [currentTeacher, setCurrentTeacher] = useState({})
   const { currentUser } = useContext(UserContext)
 
+  const getTeachersMap = async () => {
+    const teachersMap = await getTeachers()
+    setTeachersMap(teachersMap)
+  }
   useEffect(() => {
-    const getTeachersMap = async () => {
-      const teachersMap = await getTeachers()
-      setTeachersMap(teachersMap)
-    }
     getTeachersMap()
     console.log('Running useEffect: teachersMap')
-  }, [])
+  }, [currentUser])
 
   useEffect(() => {
-    setTeachersIdMap(
-      Array.from(teachersMap).reduce((acc, [_, teacher]) => {
+    const newTeachersIdMap = Array.from(teachersMap).reduce(
+      (acc, [_, teacher]) => {
         acc.set(teacher.id, teacher)
         return acc
-      }, new Map())
+      },
+      new Map()
     )
+    setTeachersIdMap(newTeachersIdMap)
+    console.log('new teachersIdMap')
+    console.log(newTeachersIdMap)
   }, [teachersMap])
 
   useEffect(() => {
     if (teachersMap && teachersMap.size && currentUser) {
       setCurrentTeacher(teachersMap.get(currentUser.email))
     } else {
+      console.log('resetting current teacher')
       setCurrentTeacher({})
     }
   }, [teachersMap, currentUser])
@@ -44,8 +49,12 @@ export const TeachersProvider = ({ children }) => {
   const updateTeacherData = (teacher, newData) => {
     const updatedTeacher = { ...teacher, ...newData }
     updatePersonData('teachers', teacher, updatedTeacher)
-    setTeachersMap(teachersMap.set(teacher.email, updatedTeacher))
-    setCurrentTeacher(updatedTeacher)
+    getTeachersMap()
+    console.log(`new teachersMap`)
+  }
+
+  const resetTeachersContext = () => {
+    setTeachersMap(teachersMapInitial)
   }
 
   const value = {
@@ -53,6 +62,7 @@ export const TeachersProvider = ({ children }) => {
     teachersIdMap,
     currentTeacher,
     updateTeacherData,
+    resetTeachersContext,
   }
   return (
     <TeachersContext.Provider value={value}>

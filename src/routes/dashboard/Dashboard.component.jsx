@@ -7,7 +7,7 @@ import GroupForm from '../../components/group-form/GroupForm.component'
 
 const Dashboard = () => {
   const { currentTeacher } = useContext(TeachersContext)
-  if (!currentTeacher) {
+  if (!Object.keys(currentTeacher).length) {
     return <BigLoading />
   }
   const { name, group } = currentTeacher
@@ -31,7 +31,7 @@ const Dashboard = () => {
           </div>
         </div>
       ) : (
-        <GroupForm />
+        <GroupForm teacher={currentTeacher} />
       )}
     </>
   )

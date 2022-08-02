@@ -111,11 +111,30 @@ export const removeRequestFromGroup = async (email, group) => {
       .data()
       .requests.filter((request) => request.email !== email)
     const newData = { ...docSnapshot.data(), requests: newRequests }
-    updateGroupData(group, newData)
+    await updateGroupData(group, newData)
     return newRequests
   } else {
     console.log('No such document!')
   }
+}
+
+export const addRequestToGroup = async (teacher, group) => {
+  const groupRef = doc(db, 'groups', group)
+  const docSnapshot = await getDoc(groupRef)
+  const existingRequest = docSnapshot
+    .data()
+    .requests.find((request) => request.email === teacher.email)
+  if (existingRequest) {
+    // Cancel send
+    throw new Error(`You have already sent a request to ${group}`)
+  }
+  const newRequests = [
+    { email: teacher.email, id: teacher.id },
+    ...docSnapshot.data().requests,
+  ]
+  const newData = { ...docSnapshot.data(), requests: newRequests }
+  await updateGroupData(group, newData)
+  return newRequests
 }
 
 export const getStudents = async (teacherGroup) => {
@@ -193,9 +212,12 @@ export const updatePersonData = (collectionKey, person, newData) => {
   }
 }
 
-export const updateGroupData = (group, newData) => {
+export const updateGroupData = async (group, newData) => {
   const groupRef = doc(db, 'groups', group)
-  updateDoc(groupRef, newData)
-    .then(() => console.log(`Successfully updated group data`))
-    .catch((error) => console.log(error))
+  try {
+    await updateDoc(groupRef, newData)
+    console.log(`Successfully updated group data`)
+  } catch (error) {
+    console.log(error)
+  }
 }

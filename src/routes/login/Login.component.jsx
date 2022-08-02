@@ -37,6 +37,7 @@ const Login = () => {
     if (user) {
       navigate('dashboard')
     }
+    setIsLoading(false)
   }
   return (
     <div className='login-container'>

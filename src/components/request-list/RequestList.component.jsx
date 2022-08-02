@@ -24,14 +24,22 @@ const RequestList = () => {
   }, [currentTeacher])
 
   const handleAccept = (teacher) => {
+    setIsLoading(true)
     console.log('accepting teacher.')
-    updateTeacherData(teacher, { group: currentTeacher.group })
-    setRequests(removeRequestFromGroup(teacher.email, currentTeacher.group))
+    removeRequestFromGroup(teacher.email, currentTeacher.group)
+      .then((requests) => setRequests(requests))
+      .then(() => {
+        updateTeacherData(teacher, { group: currentTeacher.group })
+      })
+      .then(() => setIsLoading(false))
   }
 
   const handleReject = (teacher) => {
+    setIsLoading(true)
     console.log('rejecting teacher')
-    setRequests(removeRequestFromGroup(teacher.email, currentTeacher.group))
+    removeRequestFromGroup(teacher.email, currentTeacher.group)
+      .then((requests) => setRequests(requests))
+      .then(() => setIsLoading(false))
   }
 
   return (
@@ -45,12 +53,12 @@ const RequestList = () => {
         {isLoading ? (
           <BigLoading />
         ) : (
+          requests.length > 0 &&
           requests.map((teacher) => (
             <PersonPreview
               key={teacher.id}
               person={teacher}
-              handleAccept={handleAccept}
-              handleReject={handleReject}
+              request={[handleAccept, handleReject]}
             />
           ))
         )}

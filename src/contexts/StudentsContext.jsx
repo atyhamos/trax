@@ -4,6 +4,7 @@ import {
   getStudents,
 } from '../utils/firebase/firebase.utils'
 import { TeachersContext } from './TeachersContext'
+import { UserContext } from './UserContext'
 
 export const StudentsContext = createContext({
   studentsMap: {},
@@ -95,7 +96,11 @@ export const StudentsProvider = ({ children }) => {
     setStudentsMap(newStudents)
   }
 
-  const value = { studentsMap, addFeedback }
+  const resetStudentsContext = () => {
+    setStudentsMap(studentsMapInitial)
+  }
+
+  const value = { studentsMap, addFeedback, resetStudentsContext }
   return (
     <StudentsContext.Provider value={value}>
       {children}
