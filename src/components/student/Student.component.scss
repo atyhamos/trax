@@ -15,8 +15,6 @@
       font-weight: bold;
     }
   }
-  .student-info-container {
-  }
 }
 
 .student-feedback-container {
@@ -134,4 +132,16 @@
 .close-form-button:focus {
   background: red;
   color: white;
+}
+
+.delete-confirm-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  text-align: center;
+  top: 40%;
+  padding: 4em;
+  background: #ffffff;
+  margin: auto;
 }

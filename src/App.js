@@ -50,7 +50,9 @@ function App() {
           path='admin/*'
           element={
             <ProtectedRoute
-              isAllowed={currentUser && currentTeacher.isAdmin}
+              isAllowed={
+                currentUser && currentTeacher && currentTeacher.isAdmin
+              }
               redirectPath='/dashboard'
             >
               <Admin />

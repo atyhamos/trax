@@ -8,8 +8,11 @@ import { BigLoading } from '../loading/Loading.component'
 import './Student.component.scss'
 
 const Student = () => {
-  const { studentsMap } = useContext(StudentsContext)
+  const { studentsMap, deleteFeedbackFromStudent } = useContext(StudentsContext)
+  const [isDeletingFeedback, setIsDeletingFeedback] = useState(false)
   const [isWritingFeedback, setIsWritingFeedback] = useState(false)
+  const [feedbackToDelete, setFeedbackToDelete] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   const studentId = useParams().id
   const student = studentsMap.get(parseInt(studentId))
   if (!student) {
@@ -19,6 +22,20 @@ const Student = () => {
     student
 
   const toggleForm = () => setIsWritingFeedback(!isWritingFeedback)
+  const toggleModal = (feedback) => {
+    setIsDeletingFeedback(!isDeletingFeedback)
+    setFeedbackToDelete(feedback)
+  }
+
+  const deleteFeedback = () => {
+    setIsLoading(true)
+    deleteFeedbackFromStudent(student, feedbackToDelete).then(() => {
+      toggleModal()
+      setIsLoading(false)
+    })
+  }
+
+  if (isLoading) return <BigLoading />
 
   return (
     <div>
@@ -29,6 +46,17 @@ const Student = () => {
               &#10005; <span>Close Form</span>
             </span>
           </FeedbackForm>
+        </div>
+      )}
+      {isDeletingFeedback && (
+        <div className='modal'>
+          <div className='delete-confirm-container'>
+            <h2>Are you sure you want to delete this comment?</h2>
+            <p>It cannot be undone.</p>
+            <button className='btn' onClick={deleteFeedback}>
+              Delete
+            </button>
+          </div>
         </div>
       )}
       <div className='student-container'>
@@ -56,7 +84,11 @@ const Student = () => {
           </div>
           {feedbackList.map((feedback) => {
             return (
-              <Feedback key={`${name} ${feedback.id}`} feedback={feedback} />
+              <Feedback
+                key={`${name} ${feedback.id}`}
+                feedback={feedback}
+                toggleModal={() => toggleModal(feedback)}
+              />
             )
           })}
         </div>

@@ -2,14 +2,15 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import {
   addFeedbackToStudent,
   getStudents,
+  updatePersonData,
 } from '../utils/firebase/firebase.utils'
 import { TeachersContext } from './TeachersContext'
-import { UserContext } from './UserContext'
 
 export const StudentsContext = createContext({
   studentsMap: {},
   setStudentsMap: () => null,
   addFeedback: () => null,
+  deleteFeedbackFromStudent: () => null,
 })
 
 export const StudentsProvider = ({ children }) => {
@@ -19,8 +20,10 @@ export const StudentsProvider = ({ children }) => {
 
   useEffect(() => {
     const getStudentsMap = async () => {
-      const studentsMap = await getStudents(currentTeacher.group) // get students from teacher's group
-      setStudentsMap(studentsMap)
+      if (currentTeacher) {
+        const studentsMap = await getStudents(currentTeacher.group) // get students from teacher's group
+        setStudentsMap(studentsMap)
+      }
     }
     getStudentsMap()
     console.log('Running useEffect: studentsMap')
@@ -96,11 +99,30 @@ export const StudentsProvider = ({ children }) => {
     setStudentsMap(newStudents)
   }
 
+  const deleteFeedbackFromStudent = async (student, feedbackToDelete) => {
+    console.log('deleting feedback from student')
+    console.log(feedbackToDelete)
+    const newFeedback = student.feedbackList.filter(
+      (feedback) => feedback.id !== feedbackToDelete.id
+    )
+    const newData = { ...student, feedbackList: newFeedback }
+    await updatePersonData('students', student, newData)
+    const newStudents = new Map(studentsMap)
+    newStudents.set(student.id, newData)
+    console.log(newData)
+    setStudentsMap(newStudents)
+  }
+
   const resetStudentsContext = () => {
     setStudentsMap(studentsMapInitial)
   }
 
-  const value = { studentsMap, addFeedback, resetStudentsContext }
+  const value = {
+    studentsMap,
+    addFeedback,
+    deleteFeedbackFromStudent,
+    resetStudentsContext,
+  }
   return (
     <StudentsContext.Provider value={value}>
       {children}

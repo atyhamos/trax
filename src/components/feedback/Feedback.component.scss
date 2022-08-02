@@ -1,3 +1,16 @@
+#delete-feedback {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: blue;
+  cursor: pointer;
+}
+
+#delete-feedback:hover,
+#delete-feedback:focus {
+  color: darkblue;
+}
+
 .student-feedback {
   display: flex;
   //   align-items: center;
@@ -10,6 +23,7 @@
   margin-bottom: 1em;
   scale: 1;
   transition: scale 0.25s;
+  position: relative;
   .comment-author {
     position: absolute;
     top: 0;

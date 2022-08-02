@@ -20,7 +20,7 @@ export const TeachersProvider = ({ children }) => {
     setTeachersMap(teachersMap)
   }
   useEffect(() => {
-    getTeachersMap()
+    setTimeout(getTeachersMap, 3000)
     console.log('Running useEffect: teachersMap')
   }, [currentUser])
 

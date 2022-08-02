@@ -14,6 +14,7 @@ const Teacher = () => {
   if (!teachersIdMap.size) {
     return <BigLoading />
   }
+  console.log(teachersIdMap)
   const selectedTeacher = teachersIdMap.get(Number(teacherId))
 
   const toggleForm = () => {
@@ -24,12 +25,12 @@ const Teacher = () => {
     <>
       {isEditingProfile && (
         <div className='modal'>
-          <EditProfileForm teacher={currentTeacher} closeModal={toggleForm} />
+          <EditProfileForm teacher={selectedTeacher} closeModal={toggleForm} />
         </div>
       )}
       <div className='teacher-container'>
-        <img src={BlankPicture} alt={currentTeacher.name} />
-        <h2>{currentTeacher.name}</h2>
+        <img src={BlankPicture} alt={selectedTeacher.name} />
+        <h2>{selectedTeacher.name}</h2>
         {currentTeacher.email === selectedTeacher.email && (
           <button onClick={toggleForm} className='btn'>
             Edit name
