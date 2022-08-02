@@ -15,14 +15,6 @@
     flex-direction: column;
     width: 400px;
 
-    input {
-      margin: 0.3em 0;
-      height: 4em;
-      padding: 0.2em;
-      font-size: 1.1rem;
-      font-family: 'Montserrat', sans-serif;
-    }
-
     button {
       padding: 0.7em;
       margin-top: 0.3em;
@@ -43,4 +35,12 @@
       scale: 1.05;
     }
   }
+}
+
+.text-input {
+  margin: 0.3em 0;
+  height: 4em;
+  padding: 0.2em;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', sans-serif;
 }

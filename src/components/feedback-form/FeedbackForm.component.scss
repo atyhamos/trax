@@ -1,4 +1,4 @@
-.feedback-form-container {
+.form-container {
   width: 80%;
   max-width: 500px;
   margin: 15% auto;
@@ -28,26 +28,26 @@
       padding-left: 1em;
       padding-top: 0.5em;
     }
-    button {
-      padding: 0.6em 0.7em;
-      width: 300px;
-      margin: 1.6rem auto 1rem auto;
-      border: 1px solid black;
-      font-size: 1.1rem;
-      background: black;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 100ms;
-    }
-    button:hover,
-    button:focus {
-      color: black;
-      background-color: rgba(250, 203, 150, 0.466);
-    }
   }
 }
 
+.btn {
+  padding: 0.6em 0.7em;
+  width: 300px;
+  margin: 1.6rem auto 1rem auto;
+  border: 1px solid black;
+  font-size: 1.1rem;
+  background: black;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 100ms;
+}
+.btn:hover,
+.btn:focus {
+  color: black;
+  background-color: rgba(250, 203, 150, 0.466);
+}
 .input-container {
   border: 1px solid black;
   margin-bottom: 1.2em;

@@ -33,7 +33,7 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
     setFormData({ ...formData, [name]: value })
   }
   return (
-    <div className='feedback-form-container'>
+    <div className='form-container'>
       {children}
 
       <h2>Feedback Form for {name}</h2>
@@ -97,7 +97,9 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
           name='comment'
           onChange={handleChange}
         />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='btn'>
+          Submit
+        </button>
       </form>
     </div>
   )

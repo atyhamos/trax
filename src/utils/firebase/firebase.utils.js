@@ -140,3 +140,22 @@ export const updateDisplayName = (name) => {
     .then(() => console.log('Display name updated!'))
     .catch((error) => console.log(error))
 }
+
+export const updatePersonData = (collectionKey, person, newData) => {
+  switch (collectionKey) {
+    case 'teachers':
+      const teacherRef = doc(db, collectionKey, person.email)
+      updateDoc(teacherRef, newData)
+        .then(() => console.log(`Successfully updated profile`))
+        .catch((error) => console.log(error))
+      break
+    case 'students':
+      const studentRef = doc(db, collectionKey, person.name)
+      updateDoc(studentRef, newData)
+        .then(() => console.log(`Successfully updated profile`))
+        .catch((error) => console.log(error))
+      break
+    default:
+      break
+  }
+}

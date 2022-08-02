@@ -1,0 +1,18 @@
+.edit-name-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .close-form-button {
+    position: absolute;
+  }
+  .input-container {
+    margin-top: 3em;
+    input {
+      width: 100%;
+    }
+  }
+
+  .btn {
+    margin: 0 auto;
+  }
+}

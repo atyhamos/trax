@@ -1,22 +1,42 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { TeachersContext } from '../../contexts/TeachersContext'
 import BlankPicture from '../../images/blank-profile.svg'
+import EditProfileForm from '../edit-profile-form/EditProfileForm.component'
 import { BigLoading } from '../loading/Loading.component'
 import './Teacher.component.scss'
 
 const Teacher = () => {
-  const { teachersIdMap } = useContext(TeachersContext)
+  const { teachersIdMap, currentTeacher } = useContext(TeachersContext)
+  const [isEditingProfile, setIsEditingProfile] = useState(false)
+
   const teacherId = useParams().id
   if (!teachersIdMap.size) {
     return <BigLoading />
   }
-  const name = teachersIdMap.get(Number(teacherId)).name
+  const selectedTeacher = teachersIdMap.get(Number(teacherId))
+
+  const toggleForm = () => {
+    setIsEditingProfile(!isEditingProfile)
+  }
+
   return (
-    <div className='teacher-container'>
-      <img src={BlankPicture} alt={name} />
-      <h2>{name}</h2>
-    </div>
+    <>
+      {isEditingProfile && (
+        <div className='modal'>
+          <EditProfileForm teacher={currentTeacher} closeModal={toggleForm} />
+        </div>
+      )}
+      <div className='teacher-container'>
+        <img src={BlankPicture} alt={currentTeacher.name} />
+        <h2>{currentTeacher.name}</h2>
+        {currentTeacher.email === selectedTeacher.email && (
+          <button onClick={toggleForm} className='btn'>
+            Edit name
+          </button>
+        )}
+      </div>
+    </>
   )
 }
 

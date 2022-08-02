@@ -40,7 +40,8 @@ const Login = () => {
   }
   return (
     <div className='login-container'>
-      <h2>TYA Records</h2>
+      <h2>Trax</h2>
+      <p>Efficiently manage your students' progress</p>
       <form onSubmit={handleSubmit}>
         <input
           type='email'
@@ -49,6 +50,7 @@ const Login = () => {
           name='email'
           value={email}
           onChange={handleChange}
+          className='text-input'
         ></input>
         <input
           type='password'
@@ -57,6 +59,7 @@ const Login = () => {
           name='password'
           value={password}
           onChange={handleChange}
+          className='text-input'
         ></input>
         <button className='button' type='submit' disabled={isLoading}>
           Login

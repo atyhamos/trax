@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getTeachers } from '../utils/firebase/firebase.utils'
+import { getTeachers, updatePersonData } from '../utils/firebase/firebase.utils'
 import { UserContext } from './UserContext'
 
 export const TeachersContext = createContext({
@@ -19,16 +19,19 @@ export const TeachersProvider = ({ children }) => {
     const getTeachersMap = async () => {
       const teachersMap = await getTeachers()
       setTeachersMap(teachersMap)
-      setTeachersIdMap(
-        Array.from(teachersMap).reduce((acc, [_, teacher]) => {
-          acc.set(teacher.id, teacher)
-          return acc
-        }, new Map())
-      )
     }
     getTeachersMap()
     console.log('Running useEffect: teachersMap')
   }, [])
+
+  useEffect(() => {
+    setTeachersIdMap(
+      Array.from(teachersMap).reduce((acc, [_, teacher]) => {
+        acc.set(teacher.id, teacher)
+        return acc
+      }, new Map())
+    )
+  }, [teachersMap])
 
   useEffect(() => {
     if (teachersMap && teachersMap.size && currentUser) {
@@ -38,7 +41,19 @@ export const TeachersProvider = ({ children }) => {
     }
   }, [teachersMap, currentUser])
 
-  const value = { teachersMap, teachersIdMap, currentTeacher }
+  const updateTeacherName = (teacher, name) => {
+    const updatedTeacher = { ...teacher, name }
+    updatePersonData('teachers', teacher, updatedTeacher)
+    setTeachersMap(teachersMap.set(teacher.email, updatedTeacher))
+    setCurrentTeacher(updatedTeacher)
+  }
+
+  const value = {
+    teachersMap,
+    teachersIdMap,
+    currentTeacher,
+    updateTeacherName,
+  }
   return (
     <TeachersContext.Provider value={value}>
       {children}
