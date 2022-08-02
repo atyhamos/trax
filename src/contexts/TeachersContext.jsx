@@ -41,8 +41,8 @@ export const TeachersProvider = ({ children }) => {
     }
   }, [teachersMap, currentUser])
 
-  const updateTeacherName = (teacher, name) => {
-    const updatedTeacher = { ...teacher, name }
+  const updateTeacherData = (teacher, newData) => {
+    const updatedTeacher = { ...teacher, ...newData }
     updatePersonData('teachers', teacher, updatedTeacher)
     setTeachersMap(teachersMap.set(teacher.email, updatedTeacher))
     setCurrentTeacher(updatedTeacher)
@@ -52,7 +52,7 @@ export const TeachersProvider = ({ children }) => {
     teachersMap,
     teachersIdMap,
     currentTeacher,
-    updateTeacherName,
+    updateTeacherData,
   }
   return (
     <TeachersContext.Provider value={value}>

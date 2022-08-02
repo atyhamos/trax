@@ -4,7 +4,7 @@ import './EditProfileForm.component.scss'
 
 const EditProfileForm = ({ teacher, closeModal }) => {
   const [formData, setFormData] = useState({ name: '' })
-  const { updateTeacherName } = useContext(TeachersContext)
+  const { updateTeacherData } = useContext(TeachersContext)
   const { name } = formData
 
   const handleChange = (event) => {
@@ -14,7 +14,7 @@ const EditProfileForm = ({ teacher, closeModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    updateTeacherName(teacher, name)
+    updateTeacherData(teacher, { name: name })
     closeModal()
   }
 

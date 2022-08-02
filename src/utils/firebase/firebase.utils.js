@@ -85,6 +85,39 @@ export const getTeachers = async () => {
   return teachersMap
 }
 
+export const getGroups = async () => {
+  const collectionRef = collection(db, 'groups')
+  const q = query(collectionRef)
+  const querySnapshot = await getDocs(q)
+  return querySnapshot.docs
+}
+
+export const getRequests = async (group) => {
+  const docRef = doc(db, 'groups', group)
+  const docSnapshot = await getDoc(docRef)
+  if (docSnapshot.exists()) {
+    console.log('Document data:', docSnapshot.data())
+    return docSnapshot.data().requests
+  } else {
+    console.log('No such document!')
+  }
+}
+
+export const removeRequestFromGroup = async (email, group) => {
+  const groupRef = doc(db, 'groups', group)
+  const docSnapshot = await getDoc(groupRef)
+  if (docSnapshot.exists()) {
+    const newRequests = docSnapshot
+      .data()
+      .requests.filter((request) => request.email !== email)
+    const newData = { ...docSnapshot.data(), requests: newRequests }
+    updateGroupData(group, newData)
+    return newRequests
+  } else {
+    console.log('No such document!')
+  }
+}
+
 export const getStudents = async (teacherGroup) => {
   const collectionRef = collection(db, 'students')
   const q = query(collectionRef)
@@ -158,4 +191,11 @@ export const updatePersonData = (collectionKey, person, newData) => {
     default:
       break
   }
+}
+
+export const updateGroupData = (group, newData) => {
+  const groupRef = doc(db, 'groups', group)
+  updateDoc(groupRef, newData)
+    .then(() => console.log(`Successfully updated group data`))
+    .catch((error) => console.log(error))
 }

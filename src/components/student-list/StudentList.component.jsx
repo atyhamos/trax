@@ -8,11 +8,11 @@ const StudentList = () => {
   const { studentsMap } = useContext(StudentsContext)
 
   return (
-    <div className='students-container'>
+    <div className='person-container'>
       <h2>Students</h2>
       <div className='headings-container'>
-        <h3 className='student-name-label'>Name</h3>
-        <h3 className='student-level-label'>Level</h3>
+        <h3 className='person-name-label'>Name</h3>
+        <h3 className='person-level-label'>Level</h3>
       </div>
       {!studentsMap.size && <BigLoading />}
       <div className='table-container'>
