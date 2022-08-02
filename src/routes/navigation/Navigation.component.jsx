@@ -1,11 +1,17 @@
 import { useContext } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../contexts/UserContext'
 import { signOutAuthUser } from '../../utils/firebase/firebase.utils'
 import './Navigation.component.scss'
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext)
+  const navigate = useNavigate()
+  const handleSignOut = () => {
+    signOutAuthUser().then(() => {
+      navigate('/')
+    })
+  }
   return (
     <>
       {currentUser && (
@@ -13,9 +19,9 @@ const Navigation = () => {
           <Link to='/dashboard'>
             <span className='nav-bar-hover'>Home</span>
           </Link>
-          <Link to='/' onClick={signOutAuthUser}>
+          <span onClick={handleSignOut}>
             <span className='nav-bar-hover'>Sign out</span>
-          </Link>
+          </span>
         </div>
       )}
       <Outlet />

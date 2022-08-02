@@ -33,20 +33,21 @@ const auth = getAuth()
 export const db = getFirestore()
 
 export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocRef = doc(db, 'volunteers', userAuth.uid)
+  const userDocRef = doc(db, 'teachers', userAuth.email)
   const userSnapshot = await getDoc(userDocRef)
   if (!userSnapshot.exists()) {
     // Create document
     const { email } = userAuth
-    const collectionRef = collection(db, 'volunteers')
+    const collectionRef = collection(db, 'teachers')
     const q = query(collectionRef)
     const querySnapshot = await getDocs(q)
     const id = querySnapshot.size + 1
     const isAdmin = false
     const name = email.split('@')[0]
+    const group = ''
     try {
       const docRef = doc(collectionRef, email)
-      await setDoc(docRef, { email, id, isAdmin, name })
+      await setDoc(docRef, { email, id, isAdmin, name, group })
     } catch (error) {
       console.log('Error creating user', error.message)
     }
@@ -72,20 +73,25 @@ export const addFeedbackToStudent = async (student, newData) => {
   await updateDoc(studentRef, newData)
 }
 
-export const getPeopleAndDocuments = async (documentKey) => {
-  const collectionRef = collection(db, documentKey)
+export const getTeachers = async () => {
+  const collectionRef = collection(db, 'teachers')
   const q = query(collectionRef)
   const querySnapshot = await getDocs(q)
-  if (documentKey === 'volunteers') {
-    const volunteersMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-      const { email } = docSnapshot.data()
-      acc.set(email, docSnapshot.data())
-      return acc
-    }, new Map())
-    return volunteersMap
-  }
+  const teachersMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { email } = docSnapshot.data()
+    acc.set(email, docSnapshot.data())
+    return acc
+  }, new Map())
+  return teachersMap
+}
+
+export const getStudents = async (teacherGroup) => {
+  const collectionRef = collection(db, 'students')
+  const q = query(collectionRef)
+  const querySnapshot = await getDocs(q)
   const studentsMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { id } = docSnapshot.data()
+    const { id, group } = docSnapshot.data()
+    if (group !== teacherGroup) return acc
     acc.set(id, docSnapshot.data())
     return acc
   }, new Map())
@@ -113,15 +119,14 @@ export const signInWithAuthEmailAndPassword = (email, password) =>
       }
     })
 
-export const signOutAuthUser = () =>
-  signOut(auth)
-    .then(() => {
-      // Signed out successfully
-      return
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+export const signOutAuthUser = async () => {
+  try {
+    await signOut(auth)
+    return
+  } catch (error) {
+    console.log(`Error while signing out: ${error}`)
+  }
+}
 
 export const onAuthStateChangedListener = (callback) => {
   onAuthStateChanged(auth, callback)

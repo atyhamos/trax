@@ -5,7 +5,7 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { StudentsProvider } from './contexts/StudentsContext'
-import { VolunteersProvider } from './contexts/VolunteersContext'
+import { TeachersProvider } from './contexts/TeachersContext'
 import { UserProvider } from './contexts/UserContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -13,11 +13,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <VolunteersProvider>
+        <TeachersProvider>
           <StudentsProvider>
             <App />
           </StudentsProvider>
-        </VolunteersProvider>
+        </TeachersProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

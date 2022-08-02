@@ -1,8 +1,9 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import {
   addFeedbackToStudent,
-  getPeopleAndDocuments,
+  getStudents,
 } from '../utils/firebase/firebase.utils'
+import { TeachersContext } from './TeachersContext'
 
 export const StudentsContext = createContext({
   studentsMap: {},
@@ -13,15 +14,16 @@ export const StudentsContext = createContext({
 export const StudentsProvider = ({ children }) => {
   const studentsMapInitial = new Map()
   const [studentsMap, setStudentsMap] = useState(studentsMapInitial)
+  const { currentTeacher } = useContext(TeachersContext)
 
   useEffect(() => {
     const getStudentsMap = async () => {
-      const studentsMap = await getPeopleAndDocuments('students')
+      const studentsMap = await getStudents(currentTeacher.group) // get students from teacher's group
       setStudentsMap(studentsMap)
     }
     getStudentsMap()
     console.log('Running useEffect: studentsMap')
-  }, [])
+  }, [currentTeacher])
 
   const calculateScores = (
     student,
@@ -61,13 +63,13 @@ export const StudentsProvider = ({ children }) => {
     behaviour,
     academics,
     date,
-    volunteer
+    teacher
   ) => {
     const student = studentsMap.get(studentId)
     const studentComments = student.feedbackList
     const id = studentComments.length + 1
     const feedbackList = [
-      { description, behaviour, academics, date, id, volunteer },
+      { description, behaviour, academics, date, id, teacher },
       ...studentComments,
     ]
     const [averageBehaviour, averageAcademics] = calculateScores(

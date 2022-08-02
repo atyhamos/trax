@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react'
-import { VolunteersContext } from '../../contexts/VolunteersContext'
+import { TeachersContext } from '../../contexts/TeachersContext'
 import { BigLoading } from '../loading/Loading.component'
 import './Feedback.component.scss'
 
 const Feedback = ({ feedback }) => {
-  const { date, description, behaviour, academics, volunteer } = feedback
+  const { date, description, behaviour, academics, teacher } = feedback
   const [isExpanded, setIsExpanded] = useState(false)
-  const { volunteersMap } = useContext(VolunteersContext)
-  if (!volunteersMap.size) {
+  const { teachersMap } = useContext(TeachersContext)
+  if (!teachersMap.size) {
     return <BigLoading />
   }
   const expandHandler = () => {
@@ -15,9 +15,7 @@ const Feedback = ({ feedback }) => {
   }
   return (
     <div className='student-feedback' tabIndex={0}>
-      <span className='comment-author'>
-        {volunteersMap.get(volunteer).name}:
-      </span>
+      <span className='comment-author'>{teachersMap.get(teacher).name}:</span>
       {!isExpanded ? (
         <p className='description'>
           {description ? description.slice(0, 49) : 'No comment'}
