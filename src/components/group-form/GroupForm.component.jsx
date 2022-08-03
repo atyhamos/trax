@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { TeachersContext } from '../../contexts/TeachersContext'
 import {
   addRequestToGroup,
   getGroups,
@@ -41,27 +42,30 @@ const GroupForm = ({ teacher }) => {
   }
 
   return (
-    <form className='form-container' onSubmit={handleSubmit}>
-      <p>You do not belong to a group.</p>
-      <p>
-        Enter the name of an existing group below to request access from their
-        admins.
-      </p>
-      <input
-        type='text'
-        placeholder='Enter group name'
-        name='name'
-        value={groupName}
-        onChange={handleChange}
-        required
-        className='text-input'
-      />
-      <button type='submit' className='btn'>
-        Submit
-      </button>
-      <br />
-      {isSearching ? <SmallLoading /> : <p>{message}</p>}
-    </form>
+    <>
+      <form className='form-container' onSubmit={handleSubmit}>
+        <h2>Dear {teacher.name},</h2>
+        <p>You do not belong to a group yet.</p>
+        <p>
+          Enter the name of an existing group below to request access from their
+          admins to start using Trax.
+        </p>
+        <input
+          type='text'
+          placeholder='Enter group name'
+          name='name'
+          value={groupName}
+          onChange={handleChange}
+          required
+          className='text-input'
+        />
+        <button type='submit' className='btn'>
+          Submit
+        </button>
+        <br />
+        {isSearching ? <SmallLoading /> : <p>{message}</p>}
+      </form>
+    </>
   )
 }
 

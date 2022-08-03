@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth'
 import {
   getFirestore,
@@ -31,6 +33,21 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth()
 
 export const db = getFirestore()
+
+// Sign in using a popup.
+const provider = new GoogleAuthProvider()
+provider.addScope('profile')
+provider.addScope('email')
+provider.setCustomParameters({
+  prompt: 'select_account',
+})
+
+export const signInWithGooglePopup = async () => {
+  const result = await signInWithPopup(auth, provider)
+  // The signed-in user info.
+  const user = result.user
+  return user
+}
 
 export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, 'teachers', userAuth.email)

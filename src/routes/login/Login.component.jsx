@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import './Login.component.scss'
-import { signInWithAuthEmailAndPassword } from '../../utils/firebase/firebase.utils'
+import {
+  signInWithAuthEmailAndPassword,
+  signInWithGooglePopup,
+} from '../../utils/firebase/firebase.utils'
 import { useContext, useEffect, useState } from 'react'
 import { SmallLoading } from '../../components/loading/Loading.component'
 import { UserContext } from '../../contexts/UserContext'
@@ -39,6 +42,17 @@ const Login = () => {
     }
     setIsLoading(false)
   }
+
+  const handleGoogleSignIn = async (event) => {
+    event.preventDefault()
+    setIsLoading(true)
+    const user = await signInWithGooglePopup()
+    if (user) {
+      navigate('dashboard')
+    }
+    setIsLoading(false)
+  }
+
   return (
     <div className='login-container'>
       <h2>Trax</h2>
@@ -62,10 +76,17 @@ const Login = () => {
           onChange={handleChange}
           className='text-input'
         ></input>
-        <button className='button' type='submit' disabled={isLoading}>
+        <button className='login-btn' type='submit' disabled={isLoading}>
           Login
         </button>
         {isLoading && <SmallLoading />}
+        <button className='login-btn google-btn' onClick={handleGoogleSignIn}>
+          <img
+            className='google-logo'
+            src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg'
+          />
+          <span>Sign-in with Google</span>
+        </button>
       </form>
     </div>
   )
