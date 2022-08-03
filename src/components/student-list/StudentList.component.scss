@@ -2,10 +2,11 @@
   margin: 0 auto;
   width: 80%;
   .student-list-header-container {
-    font-size: 2.5rem;
     display: flex;
     flex-direction: column;
     h2 {
+      font-size: 2.5rem;
+
       margin-bottom: 0;
     }
     .buttons-container {
@@ -53,12 +54,25 @@
 
 .headings-container {
   display: grid;
-  justify-content: space-evenly;
+  justify-content: space-between;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: 'name level';
   padding: 0 1em;
   background-color: rgba(250, 203, 150, 0.466);
   margin-bottom: 1em;
+}
+
+.person-name-label,
+.person-level-label {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.person-name-label:hover,
+.person-level-label:hover,
+.person-name-label:focus,
+.person-level-label:focus {
+  color: darkcyan;
 }
 
 .person-name-label {
@@ -67,6 +81,7 @@
 .person-level-label {
   grid-area: level;
   text-align: right;
+  margin-left: auto;
 }
 
 .table-container {

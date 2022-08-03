@@ -130,7 +130,7 @@
 
 .close-form-button:hover,
 .close-form-button:focus {
-  background: red;
+  background: rgb(155, 54, 54);
   color: white;
 }
 
@@ -144,4 +144,9 @@
   padding: 4em;
   background: #ffffff;
   margin: auto;
+  .close-form-button {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+  }
 }

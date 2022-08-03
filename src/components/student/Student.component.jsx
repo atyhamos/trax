@@ -47,6 +47,9 @@ const Student = () => {
       {isDeletingFeedback && (
         <div className='modal'>
           <div className='delete-confirm-container'>
+            <span className='close-form-button' onClick={toggleModal}>
+              &#10005; <span>Close</span>
+            </span>
             <h2>Are you sure you want to delete this comment?</h2>
             <p>It cannot be undone.</p>
             <button className='btn' onClick={deleteFeedback}>

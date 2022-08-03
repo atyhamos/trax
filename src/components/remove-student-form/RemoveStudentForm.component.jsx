@@ -21,14 +21,11 @@ const RemoveStudentForm = ({ closeModal, students, children }) => {
     setSelectedStudentId(Number(event.target.value))
   }
   return (
-    <div className='form-container'>
+    <div className='form-container remove-student-form'>
       <span className='close-form-button' onClick={closeModal}>
         &#10005; <span>Close Form</span>
       </span>
-      {children}
-
       <h2>Remove student</h2>
-
       <form onSubmit={handleSubmit}>
         <div className='input-container'>
           <label htmlFor='studentId'>Name</label>

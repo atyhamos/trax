@@ -33,36 +33,16 @@ export const StudentsProvider = ({ children }) => {
     console.log('Running useEffect: studentsMap')
   }, [currentTeacher])
 
-  const calculateScores = (
-    student,
-    studentComments,
-    newBehaviour,
-    newAcademics
-  ) => {
-    if (student.averageAcademics && student.averageBehaviour) {
-      // existing score, multiply for faster operation
-      const totalBehaviourScore =
-        student.averageBehaviour * studentComments.length + newBehaviour
-      const totalAcademicScore =
-        student.averageAcademics * studentComments.length + newAcademics
-      const newAverageBehaviour =
-        totalBehaviourScore / (studentComments.length + 1)
-      const newAverageAcademics =
-        totalAcademicScore / (studentComments.length + 1)
-      return [newAverageBehaviour, newAverageAcademics]
-    } else {
-      // calculate from scratch
-      let totalBehaviourScore = newBehaviour
-      let totalAcademicScore = newAcademics
-      studentComments.forEach((feedback) => {
-        totalBehaviourScore += feedback.behaviour
-        totalAcademicScore += feedback.academics
-      })
-      const averageBehaviour =
-        totalBehaviourScore / (studentComments.length + 1)
-      const averageAcademics = totalAcademicScore / (studentComments.length + 1)
-      return [averageBehaviour, averageAcademics]
-    }
+  const calculateScores = (studentComments) => {
+    let totalBehaviourScore = 0
+    let totalAcademicScore = 0
+    studentComments.forEach((feedback) => {
+      totalBehaviourScore += feedback.behaviour
+      totalAcademicScore += feedback.academics
+    })
+    const averageBehaviour = totalBehaviourScore / studentComments.length
+    const averageAcademics = totalAcademicScore / studentComments.length
+    return [averageBehaviour, averageAcademics]
   }
 
   const addFeedback = (
@@ -80,14 +60,9 @@ export const StudentsProvider = ({ children }) => {
       { description, behaviour, academics, date, id, teacher },
       ...studentComments,
     ]
-    const [averageBehaviour, averageAcademics] = calculateScores(
-      student,
-      studentComments,
-      behaviour,
-      academics
-    )
+    const [averageBehaviour, averageAcademics] = calculateScores(feedbackList)
 
-    const newStudent = {
+    const newData = {
       ...student,
       feedbackList,
       averageBehaviour,
@@ -98,23 +73,29 @@ export const StudentsProvider = ({ children }) => {
       averageBehaviour,
       averageAcademics,
     })
-    const newStudents = new Map(studentsMap)
-    newStudents.set(studentId, newStudent)
-    setStudentsMap(newStudents)
+    const newStudentsMap = new Map(studentsMap)
+    newStudentsMap.set(studentId, newData)
+    setStudentsMap(newStudentsMap)
   }
 
   const deleteFeedbackFromStudent = async (student, feedbackToDelete) => {
     console.log('deleting feedback from student')
     console.log(feedbackToDelete)
-    const newFeedback = student.feedbackList.filter(
+    const feedbackList = student.feedbackList.filter(
       (feedback) => feedback.id !== feedbackToDelete.id
     )
-    const newData = { ...student, feedbackList: newFeedback }
+    const [averageBehaviour, averageAcademics] = calculateScores(feedbackList)
+    const newData = {
+      ...student,
+      feedbackList,
+      averageBehaviour,
+      averageAcademics,
+    }
     await updatePersonData('students', student, newData)
-    const newStudents = new Map(studentsMap)
-    newStudents.set(student.id, newData)
+    const newStudentsMap = new Map(studentsMap)
+    newStudentsMap.set(student.id, newData)
     console.log(newData)
-    setStudentsMap(newStudents)
+    setStudentsMap(newStudentsMap)
   }
 
   const resetStudentsContext = () => {
