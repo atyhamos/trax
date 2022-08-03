@@ -5,14 +5,19 @@ import { StudentsContext } from '../../contexts/StudentsContext'
 import { BigLoading } from '../loading/Loading.component'
 import { TeachersContext } from '../../contexts/TeachersContext'
 import AddStudentForm from '../add-student-form/AddStudentForm.component'
+import RemoveStudentForm from '../remove-student-form/RemoveStudentForm.component'
 
 const StudentList = () => {
   const { studentsMap } = useContext(StudentsContext)
   const { currentTeacher } = useContext(TeachersContext)
   const [isAddingStudent, setIsAddingStudent] = useState(false)
+  const [isRemovingStudent, setIsRemovingStudent] = useState(false)
 
-  const toggleModal = () => {
+  const toggleModalAdd = () => {
     setIsAddingStudent(!isAddingStudent)
+  }
+  const toggleModalRemove = () => {
+    setIsRemovingStudent(!isRemovingStudent)
   }
 
   return (
@@ -20,8 +25,17 @@ const StudentList = () => {
       {isAddingStudent && (
         <div className='modal'>
           <AddStudentForm
-            closeModal={toggleModal}
+            closeModal={toggleModalAdd}
             group={currentTeacher.group}
+          />
+        </div>
+      )}
+      {isRemovingStudent && (
+        <div className='modal'>
+          <RemoveStudentForm
+            closeModal={toggleModalRemove}
+            group={currentTeacher.group}
+            students={Array.from(studentsMap)}
           />
         </div>
       )}
@@ -29,9 +43,20 @@ const StudentList = () => {
         <div className='student-list-header-container'>
           <h2>Students</h2>
           {currentTeacher.isAdmin && (
-            <button className='add-student-button' onClick={toggleModal}>
-              +
-            </button>
+            <div className='buttons-container'>
+              <button
+                className='list-button add-student-button'
+                onClick={toggleModalAdd}
+              >
+                +
+              </button>
+              <button
+                className='list-button remove-student-button'
+                onClick={toggleModalRemove}
+              >
+                -
+              </button>
+            </div>
           )}
         </div>
 

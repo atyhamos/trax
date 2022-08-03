@@ -4,20 +4,42 @@
   .student-list-header-container {
     font-size: 2.5rem;
     display: flex;
-    align-items: center;
-    .add-student-button {
-      margin-left: 1em;
-      background: green;
+    flex-direction: column;
+    h2 {
+      margin-bottom: 0;
+    }
+    .buttons-container {
+      align-self: flex-start;
+      margin-bottom: 0.5em;
+    }
+    .list-button {
+      margin-right: 1em;
       color: white;
-      padding: 0.75em;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: bold;
       border: none;
       cursor: pointer;
     }
+    .list-button:hover,
+    .list-button:focus {
+      background: darkgreen;
+    }
+    .add-student-button {
+      padding: 0.75em 1em;
+
+      background: green;
+    }
     .add-student-button:hover,
     .add-student-button:focus {
       background: darkgreen;
+    }
+    .remove-student-button {
+      padding: 0.75em 1.15em;
+      background: red;
+    }
+    .remove-student-button:hover,
+    .remove-student-button:focus {
+      background: darkred;
     }
   }
   h3 {

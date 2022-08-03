@@ -3,6 +3,7 @@ import {
   addFeedbackToStudent,
   addStudentDocument,
   getStudents,
+  removeStudentDocument,
   updatePersonData,
 } from '../utils/firebase/firebase.utils'
 import { TeachersContext } from './TeachersContext'
@@ -13,6 +14,7 @@ export const StudentsContext = createContext({
   addFeedback: () => null,
   deleteFeedbackFromStudent: () => null,
   addStudent: () => null,
+  removeStudent: () => null,
 })
 
 export const StudentsProvider = ({ children }) => {
@@ -126,6 +128,13 @@ export const StudentsProvider = ({ children }) => {
       setStudentsMap(newStudentsMap)
     })
   }
+  const removeStudent = async (studentId) => {
+    const studentToDelete = studentsMap.get(studentId).name
+    await removeStudentDocument(studentToDelete)
+    studentsMap.delete(studentId)
+    setStudentsMap(new Map(studentsMap))
+    console.log(studentsMap)
+  }
 
   const value = {
     studentsMap,
@@ -133,6 +142,7 @@ export const StudentsProvider = ({ children }) => {
     deleteFeedbackFromStudent,
     resetStudentsContext,
     addStudent,
+    removeStudent,
   }
   return (
     <StudentsContext.Provider value={value}>

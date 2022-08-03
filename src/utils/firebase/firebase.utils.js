@@ -18,6 +18,7 @@ import {
   collection,
   writeBatch,
   query,
+  deleteDoc,
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -110,6 +111,16 @@ export const addStudentDocument = async (student, group) => {
     return studentData
   } catch (error) {
     console.log('Error creating user', error.message)
+  }
+}
+
+export const removeStudentDocument = async (studentName) => {
+  try {
+    console.log(studentName)
+    await deleteDoc(doc(db, 'students', studentName))
+    console.log(`Student document deleted: ${studentName}`)
+  } catch (error) {
+    console.log(error)
   }
 }
 
