@@ -14,13 +14,11 @@ export const levelOrderMap = new Map([
 ])
 
 export const ascLevelOrder = (student1, student2) => {
-  if (student2)
-    return levelOrderMap.get(student1.level) - levelOrderMap.get(student2.level)
+  if (student2) return student1.level.localeCompare(student2.level)
 }
 
 export const descLevelOrder = (student1, student2) => {
-  if (student2)
-    return levelOrderMap.get(student2.level) - levelOrderMap.get(student1.level)
+  if (student2) return student2.level.localeCompare(student1.level)
 }
 
 export const ascNameOrder = (student1, student2) => {
