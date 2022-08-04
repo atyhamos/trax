@@ -12,57 +12,59 @@
   form {
     display: flex;
     flex-direction: column;
+    .login-btn {
+      padding: 0.7em;
+      margin-top: 0.3em;
+      cursor: pointer;
+      background-color: rgb(223, 105, 89);
+      font-weight: bold;
+      color: white;
+      font-size: 1.4rem;
+      border: 1px solid black;
+      transition: background-color 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .login-btn:hover,
+    .login-btn:focus {
+      background-color: rgb(175, 46, 29);
+    }
+    .google-btn {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background: rgb(182, 212, 247);
+      color: black;
+      .google-logo {
+        width: 25px;
+      }
+      span {
+        margin-left: 15px;
+      }
+    }
+    .google-btn:hover,
+    .google-btn:focus {
+      background: rgb(121, 167, 219);
+    }
+
+    .signup-btn {
+      text-decoration: none;
+      text-align: center;
+      background: #000 !important;
+    }
+    .signup-btn:hover,
+    .signup-btn:focus {
+      background: rgba(250, 203, 150, 0.466) !important;
+      color: black;
+    }
   }
-  .login-btn {
-    padding: 0.7em;
-    margin-top: 0.3em;
-    cursor: pointer;
-    background-color: rgb(223, 105, 89);
-    font-weight: bold;
-    color: white;
-    font-size: 1.4rem;
-    border: 1px solid black;
-    scale: 1;
-    transition: scale 0.2s;
+
+  .text-input {
+    margin: 0.3em 0;
+    height: 4em;
+    padding: 0.2em;
+    font-size: 1.1rem;
     font-family: 'Montserrat', sans-serif;
   }
-
-  .login-btn:hover,
-  .login-btn:focus {
-    background-color: rgb(235, 84, 64);
-  }
-
-  .google-btn {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background: rgb(182, 212, 247);
-    color: black;
-    .google-logo {
-      // display: inline;
-      width: 25px;
-    }
-    span {
-      margin-left: 15px;
-    }
-  }
-  .google-btn:hover,
-  .google-btn:focus {
-    background: rgb(121, 167, 219);
-  }
-
-  .signup-btn {
-    text-decoration: none;
-    text-align: center;
-    background: #000 !important;
-  }
-}
-
-.text-input {
-  margin: 0.3em 0;
-  height: 4em;
-  padding: 0.2em;
-  font-size: 1.1rem;
-  font-family: 'Montserrat', sans-serif;
 }

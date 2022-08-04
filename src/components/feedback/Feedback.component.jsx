@@ -7,7 +7,9 @@ const Feedback = ({ feedback, toggleModal }) => {
   const { date, description, behaviour, academics, teacher } = feedback
   const [isExpanded, setIsExpanded] = useState(false)
   const { teachersMap, currentTeacher } = useContext(TeachersContext)
-
+  const formatDate = (date) => {
+    return `${date.slice(8, 10)}-${date.slice(5, 7)}-${date.slice(2, 4)}`
+  }
   if (!teachersMap.size) {
     return <BigLoading />
   }
@@ -34,7 +36,7 @@ const Feedback = ({ feedback, toggleModal }) => {
         )}
         <span className='behaviour hovertext'>{behaviour}</span>
         <span className='academics'>{academics}</span>
-        <span className='date'>{date}</span>
+        <span className='date'>{formatDate(date)}</span>
         {description.length > 50 && (
           <span className='expand' onClick={expandHandler}>
             {isExpanded ? 'see less...' : 'see more...'}

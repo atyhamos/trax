@@ -13,7 +13,6 @@
 
 .student-feedback {
   display: flex;
-  //   align-items: center;
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
@@ -43,6 +42,9 @@
   span {
     color: grey;
     font-size: 0.8rem;
+  }
+  .date {
+    word-wrap: break-word;
   }
 }
 
