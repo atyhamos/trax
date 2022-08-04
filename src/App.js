@@ -13,7 +13,6 @@ import ProtectedRoute from './routes/protected-route/ProtectedRoute.component'
 function App() {
   const { currentUser } = useContext(UserContext)
   const { currentTeacher } = useContext(TeachersContext)
-
   return (
     <Routes>
       <Route path='/' element={<Navigation />}>

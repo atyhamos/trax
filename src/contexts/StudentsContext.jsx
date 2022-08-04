@@ -9,7 +9,7 @@ import {
 import { TeachersContext } from './TeachersContext'
 
 export const StudentsContext = createContext({
-  studentsMap: {},
+  studentsMap: null,
   setStudentsMap: () => null,
   addFeedback: () => null,
   deleteFeedbackFromStudent: () => null,
@@ -18,7 +18,7 @@ export const StudentsContext = createContext({
 })
 
 export const StudentsProvider = ({ children }) => {
-  const studentsMapInitial = new Map()
+  const studentsMapInitial = new Map([['initial', true]])
   const [studentsMap, setStudentsMap] = useState(studentsMapInitial)
   const { currentTeacher } = useContext(TeachersContext)
 

@@ -19,6 +19,9 @@ const StudentList = () => {
   const [isAddingStudent, setIsAddingStudent] = useState(false)
   const [isRemovingStudent, setIsRemovingStudent] = useState(false)
   const [currentSortOrder, setCurrentSortOrder] = useState(ascLevelOrder)
+  const [sortedStudentsArray, setSortedStudentsArray] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
   const getSortedStudentsArray = () => {
     const studentsArray = Array.from(studentsMap).map(
       ([id, student]) => student
@@ -26,13 +29,13 @@ const StudentList = () => {
     studentsArray.sort(currentSortOrder)
     return studentsArray
   }
-  const [sortedStudentsArray, setSortedStudentsArray] = useState(
-    getSortedStudentsArray()
-  )
 
   useEffect(() => {
     setSortedStudentsArray(getSortedStudentsArray())
-  }, [currentSortOrder])
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 250)
+  }, [studentsMap, currentSortOrder])
 
   const toggleModalAdd = () => {
     setIsAddingStudent(!isAddingStudent)
@@ -104,12 +107,19 @@ const StudentList = () => {
             Level
           </h3>
         </div>
-        {!studentsMap.size && <BigLoading />}
-        <div className='table-container'>
-          {sortedStudentsArray.map((student) => (
-            <PersonPreview key={student.id} person={student} />
-          ))}
-        </div>
+        {isLoading ? (
+          <BigLoading />
+        ) : (
+          <div className='table-container'>
+            {sortedStudentsArray.length ? (
+              sortedStudentsArray.map((student) => (
+                <PersonPreview key={student.id} person={student} />
+              ))
+            ) : (
+              <p>No students to display.</p>
+            )}
+          </div>
+        )}
       </div>
     </>
   )

@@ -11,7 +11,7 @@ export const levelOrderMap = new Map([
   ['S2', 9],
   ['S3', 10],
   ['S4', 11],
-])
+]) // for use in Singapore's education system
 
 export const ascLevelOrder = (student1, student2) => {
   if (student2) return student1.level.localeCompare(student2.level)
