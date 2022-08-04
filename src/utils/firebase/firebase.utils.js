@@ -20,6 +20,7 @@ import {
   query,
   deleteDoc,
 } from 'firebase/firestore'
+import Hashids from 'hashids'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyApwGVR9PLDDKLOZezOQBn97Es84CLI6CE',
@@ -57,9 +58,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     // Create document
     const { email } = userAuth
     const collectionRef = collection(db, 'teachers')
-    const q = query(collectionRef)
-    const querySnapshot = await getDocs(q)
-    const id = querySnapshot.size + 1
+    const hashids = new Hashids()
+    const id = hashids.encode(Date.now())
     const isAdmin = false
     const name = email.split('@')[0]
     const group = ''
@@ -93,9 +93,8 @@ export const addStudentDocument = async (student, group) => {
     throw Error('Student already exists.')
   }
   const collectionRef = collection(db, 'students')
-  const q = query(collectionRef)
-  const querySnapshot = await getDocs(q)
-  const id = querySnapshot.size + 1
+  const hashids = new Hashids()
+  const id = hashids.encode(Date.now())
   try {
     const docRef = doc(collectionRef, student.name)
     const studentData = {

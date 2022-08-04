@@ -7,6 +7,7 @@ import {
   updatePersonData,
 } from '../utils/firebase/firebase.utils'
 import { TeachersContext } from './TeachersContext'
+import Hashids from 'hashids'
 
 export const StudentsContext = createContext({
   studentsMap: null,
@@ -18,7 +19,7 @@ export const StudentsContext = createContext({
 })
 
 export const StudentsProvider = ({ children }) => {
-  const studentsMapInitial = new Map([['initial', true]])
+  const studentsMapInitial = new Map()
   const [studentsMap, setStudentsMap] = useState(studentsMapInitial)
   const { currentTeacher } = useContext(TeachersContext)
 
@@ -34,6 +35,7 @@ export const StudentsProvider = ({ children }) => {
   }, [currentTeacher])
 
   const calculateScores = (studentComments) => {
+    if (!studentComments.length) return [0, 0]
     let totalBehaviourScore = 0
     let totalAcademicScore = 0
     studentComments.forEach((feedback) => {
@@ -55,7 +57,8 @@ export const StudentsProvider = ({ children }) => {
   ) => {
     const student = studentsMap.get(studentId)
     const studentComments = student.feedbackList
-    const id = studentComments.length + 1
+    const hashids = new Hashids()
+    const id = hashids.encode(Date.now())
     const feedbackList = [
       { description, behaviour, academics, date, id, teacher },
       ...studentComments,
