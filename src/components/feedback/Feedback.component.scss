@@ -8,7 +8,7 @@
 
 #delete-feedback:hover,
 #delete-feedback:focus {
-  color: darkblue;
+  color: red;
 }
 
 .student-feedback {
@@ -38,7 +38,7 @@
     overflow-y: hidden;
   }
   .description-full {
-    max-height: auto;
+    max-height: 100%;
   }
   span {
     color: grey;

@@ -1,4 +1,4 @@
-.students-container {
+.teachers-container {
   margin: 0 auto;
   width: 80%;
   h2 {
@@ -23,12 +23,8 @@
   margin-bottom: 1em;
 }
 
-.student-name-label {
+.teachers-name-label {
   grid-area: name;
-}
-.student-level-label {
-  grid-area: level;
-  text-align: right;
 }
 
 .table-container {

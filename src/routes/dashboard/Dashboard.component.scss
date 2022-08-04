@@ -1,6 +1,5 @@
 .dashboard-container {
   margin: 0 auto;
-  margin-top: 5em;
   width: 90%;
   @media (min-width: 767px) {
     max-width: 1500px;
@@ -31,7 +30,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
   background: rgba(0, 0, 0, 0.082);
   justify-content: space-evenly;
 

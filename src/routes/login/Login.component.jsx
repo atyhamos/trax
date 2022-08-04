@@ -55,9 +55,10 @@ const Login = () => {
 
   return (
     <div className='login-container'>
-      <h2>Trax</h2>
-      <p>Efficiently manage your students' progress</p>
+      <h1>Trax</h1>
       <form onSubmit={handleSubmit}>
+        <p>Efficiently track your students' learning</p>
+
         <input
           type='email'
           required

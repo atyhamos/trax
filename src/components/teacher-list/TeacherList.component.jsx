@@ -7,10 +7,10 @@ import { BigLoading } from '../loading/Loading.component'
 const TeacherList = () => {
   const { teachersMap, currentTeacher } = useContext(TeachersContext)
   return (
-    <div className='students-container'>
+    <div className='teachers-container'>
       <h2>Teachers</h2>
       <div className='headings-container'>
-        <h3 className='student-name-label'>Name</h3>
+        <h3 className='teachers-name-label'>Name</h3>
       </div>
       {!teachersMap.size && <BigLoading />}
       <div className='table-container'>

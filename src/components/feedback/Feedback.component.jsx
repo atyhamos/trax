@@ -23,7 +23,11 @@ const Feedback = ({ feedback, toggleModal }) => {
         </span>
         {!isExpanded ? (
           <p className='description'>
-            {description ? description.slice(0, 49) : 'No comment'}
+            {description
+              ? description.length > 50
+                ? description.slice(0, 49) + '-'
+                : description
+              : 'No comment'}
           </p>
         ) : (
           <p className='description description-full'>{description}</p>
@@ -33,7 +37,7 @@ const Feedback = ({ feedback, toggleModal }) => {
         <span className='date'>{date}</span>
         {description.length > 50 && (
           <span className='expand' onClick={expandHandler}>
-            {isExpanded ? '' : 'see more...'}
+            {isExpanded ? 'see less...' : 'see more...'}
           </span>
         )}
         {currentTeacher && currentTeacher.isAdmin && (
