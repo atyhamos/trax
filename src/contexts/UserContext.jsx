@@ -7,11 +7,13 @@ import {
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
+  signingIn: true,
 })
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
-  const value = { currentUser }
+  const [signingIn, setsigningIn] = useState(true)
+  const value = { currentUser, signingIn }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
@@ -19,6 +21,7 @@ export const UserProvider = ({ children }) => {
         createUserDocumentFromAuth(user)
       }
       setCurrentUser(user)
+      setsigningIn(false)
     })
     console.log('Running useEffect: UserProvider')
     return unsubscribe

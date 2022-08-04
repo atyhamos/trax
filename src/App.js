@@ -11,17 +11,32 @@ import { TeachersContext } from './contexts/TeachersContext'
 import ProtectedRoute from './routes/protected-route/ProtectedRoute.component'
 
 function App() {
-  const { currentUser } = useContext(UserContext)
+  const { currentUser, signingIn } = useContext(UserContext)
   const { currentTeacher } = useContext(TeachersContext)
   return (
     <Routes>
       <Route path='/' element={<Navigation />}>
         <Route index element={<Login />} />
-
+        <Route
+          path='sign-up'
+          element={
+            <ProtectedRoute
+              isAllowed={currentUser}
+              loading={signingIn}
+              redirectPath='/'
+            >
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path='dashboard'
           element={
-            <ProtectedRoute isAllowed={currentUser} redirectPath='/'>
+            <ProtectedRoute
+              isAllowed={currentUser}
+              loading={signingIn}
+              redirectPath='/'
+            >
               <Dashboard />
             </ProtectedRoute>
           }
@@ -30,7 +45,11 @@ function App() {
         <Route
           path='teachers/*'
           element={
-            <ProtectedRoute isAllowed={currentUser} redirectPath='/'>
+            <ProtectedRoute
+              isAllowed={currentUser}
+              loading={signingIn}
+              redirectPath='/'
+            >
               <Teachers />
             </ProtectedRoute>
           }
@@ -39,7 +58,11 @@ function App() {
         <Route
           path='students/*'
           element={
-            <ProtectedRoute isAllowed={currentUser} redirectPath='/'>
+            <ProtectedRoute
+              isAllowed={currentUser}
+              loading={signingIn}
+              redirectPath='/'
+            >
               <Students />
             </ProtectedRoute>
           }
@@ -52,6 +75,7 @@ function App() {
               isAllowed={
                 currentUser && currentTeacher && currentTeacher.isAdmin
               }
+              loading={signingIn}
               redirectPath='/dashboard'
             >
               <Admin />

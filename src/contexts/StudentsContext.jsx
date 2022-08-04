@@ -9,6 +9,8 @@ import {
 import { TeachersContext } from './TeachersContext'
 import Hashids from 'hashids'
 
+const EMPTY = -2
+
 export const StudentsContext = createContext({
   studentsMap: null,
   setStudentsMap: () => null,
@@ -16,18 +18,20 @@ export const StudentsContext = createContext({
   deleteFeedbackFromStudent: () => null,
   addStudent: () => null,
   removeStudent: () => null,
+  studentSize: -1,
 })
 
 export const StudentsProvider = ({ children }) => {
   const studentsMapInitial = new Map()
   const [studentsMap, setStudentsMap] = useState(studentsMapInitial)
   const { currentTeacher } = useContext(TeachersContext)
-
+  const [studentSize, setStudentSize] = useState(-1) // size of -1 means map has not been initialized
   useEffect(() => {
     const getStudentsMap = async () => {
-      if (currentTeacher) {
+      if (Object.keys(currentTeacher).length) {
         const studentsMap = await getStudents(currentTeacher.group) // get students from teacher's group
         setStudentsMap(studentsMap)
+        setStudentSize(studentsMap.size)
       }
     }
     getStudentsMap()
@@ -99,10 +103,12 @@ export const StudentsProvider = ({ children }) => {
     newStudentsMap.set(student.id, newData)
     console.log(newData)
     setStudentsMap(newStudentsMap)
+    setStudentSize(newStudentsMap.size)
   }
 
   const resetStudentsContext = () => {
     setStudentsMap(studentsMapInitial)
+    setStudentSize(-1)
   }
 
   const addStudent = (student, group) => {
@@ -127,6 +133,7 @@ export const StudentsProvider = ({ children }) => {
     resetStudentsContext,
     addStudent,
     removeStudent,
+    studentSize,
   }
   return (
     <StudentsContext.Provider value={value}>

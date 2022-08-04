@@ -25,16 +25,18 @@ export const TeachersProvider = ({ children }) => {
   }, [currentUser])
 
   useEffect(() => {
-    const newTeachersIdMap = Array.from(teachersMap).reduce(
-      (acc, [_, teacher]) => {
-        acc.set(teacher.id, teacher)
-        return acc
-      },
-      new Map()
-    )
-    setTeachersIdMap(newTeachersIdMap)
-    console.log('new teachersIdMap')
-    console.log(newTeachersIdMap)
+    if (teachersMap.size) {
+      const newTeachersIdMap = Array.from(teachersMap).reduce(
+        (acc, [_, teacher]) => {
+          acc.set(teacher.id, teacher)
+          return acc
+        },
+        new Map()
+      )
+      setTeachersIdMap(newTeachersIdMap)
+      console.log('new teachersIdMap')
+      console.log(newTeachersIdMap)
+    }
   }, [teachersMap])
 
   useEffect(() => {

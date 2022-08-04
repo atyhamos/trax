@@ -14,7 +14,7 @@ import {
 } from './ListOrders.component'
 
 const StudentList = () => {
-  const { studentsMap } = useContext(StudentsContext)
+  const { studentsMap, studentSize } = useContext(StudentsContext)
   const { currentTeacher } = useContext(TeachersContext)
   const [isAddingStudent, setIsAddingStudent] = useState(false)
   const [isRemovingStudent, setIsRemovingStudent] = useState(false)
@@ -32,10 +32,14 @@ const StudentList = () => {
 
   useEffect(() => {
     setSortedStudentsArray(getSortedStudentsArray())
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 250)
   }, [studentsMap, currentSortOrder])
+
+  useEffect(() => {
+    if (sortedStudentsArray.length && studentSize > 0) setIsLoading(false)
+    // no students
+    else if (!sortedStudentsArray.length && studentSize === 0)
+      setIsLoading(false)
+  }, [sortedStudentsArray])
 
   const toggleModalAdd = () => {
     setIsAddingStudent(!isAddingStudent)
