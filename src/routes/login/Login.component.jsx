@@ -7,6 +7,7 @@ import {
 import { useContext, useEffect, useState } from 'react'
 import { SmallLoading } from '../../components/loading/Loading.component'
 import { UserContext } from '../../contexts/UserContext'
+import { Link } from 'react-router-dom'
 
 const initialFormData = {
   email: '',
@@ -58,7 +59,6 @@ const Login = () => {
       <h1>Trax</h1>
       <form onSubmit={handleSubmit}>
         <p>Efficiently track your students' learning</p>
-
         <input
           type='email'
           required
@@ -88,6 +88,10 @@ const Login = () => {
           />
           <span>Sign-in with Google</span>
         </button>
+        <hr />
+        <Link to='sign-up' className='login-btn signup-btn'>
+          <span>Sign Up</span>
+        </Link>
       </form>
     </div>
   )

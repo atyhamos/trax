@@ -9,8 +9,6 @@ import {
 import { TeachersContext } from './TeachersContext'
 import Hashids from 'hashids'
 
-const EMPTY = -2
-
 export const StudentsContext = createContext({
   studentsMap: null,
   setStudentsMap: () => null,
@@ -98,7 +96,7 @@ export const StudentsProvider = ({ children }) => {
       averageBehaviour,
       averageAcademics,
     }
-    await updatePersonData('students', student, newData)
+    updatePersonData('students', student, newData)
     const newStudentsMap = new Map(studentsMap)
     newStudentsMap.set(student.id, newData)
     console.log(newData)

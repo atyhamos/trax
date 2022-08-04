@@ -1,69 +1,109 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TeachersContext } from '../../contexts/TeachersContext'
 import {
   addRequestToGroup,
+  createGroup,
   getGroups,
 } from '../../utils/firebase/firebase.utils'
 import { SmallLoading } from '../loading/Loading.component'
 import './GroupForm.component.scss'
 
 const GroupForm = ({ teacher }) => {
-  const [groupName, setGroupName] = useState('')
-  const [message, setMessage] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
+  const [requestGroupName, setRequestGroupName] = useState('')
+  const [createGroupName, setCreateGroupName] = useState('')
+  const [requestMessage, setRequestMessage] = useState('')
+  const [createMessage, setCreateMessage] = useState('')
+  const [isRequesting, setIsRequesting] = useState(false)
+  const [isCreating, setIsCreating] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleRequest = (e) => {
     // Search if that group name exists
     e.preventDefault()
-    setIsSearching(true)
+    setIsRequesting(true)
     getGroups()
       .then((groups) => {
-        return groups.filter((group) => group.id === groupName)
+        return groups.filter((group) => group.id === requestGroupName)
       })
       .then((res) => {
         if (res.length) {
-          addRequestToGroup(teacher, groupName)
+          addRequestToGroup(teacher, requestGroupName)
             .then(() => {
-              setMessage(`Group found! Request to join ${groupName} sent.`)
-              setIsSearching(false)
+              setRequestMessage(
+                `Group found! Request to join ${requestGroupName} sent.`
+              )
+              setIsRequesting(false)
             })
             .catch((err) => {
-              setMessage(err)
-              setIsSearching(false)
+              console.log(err)
+              setRequestMessage(err.message)
+              setIsRequesting(false)
             })
         } else {
-          setMessage(`Group not found. Try again`)
-          setIsSearching(false)
+          setRequestMessage(`Group not found. Try again`)
+          setIsRequesting(false)
         }
       })
   }
-  const handleChange = (event) => {
-    setGroupName(event.target.value)
+
+  const handleCreate = (e) => {
+    e.preventDefault()
+    setIsCreating(true)
+    createGroup(teacher, createGroupName)
+      .then(() => {
+        setCreateMessage(`Group created! `)
+        setIsCreating(false)
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      })
+      .catch((err) => {
+        setCreateMessage(err.message)
+        setIsCreating(false)
+      })
+  }
+
+  const handleRequestChange = (event) => {
+    setRequestGroupName(event.target.value)
+  }
+  const handleCreateChange = (event) => {
+    setCreateGroupName(event.target.value)
   }
 
   return (
     <>
-      <form className='form-container' onSubmit={handleSubmit}>
+      <form className='form-container' onSubmit={handleRequest}>
         <h2>Dear {teacher.name},</h2>
-        <p>You do not belong to a group yet.</p>
-        <p>
-          Enter the name of an existing group below to request access from their
-          admins to start using Trax.
-        </p>
+        <p>You do not belong to a group.</p>
+        <label>Request to join a group:</label>
         <input
           type='text'
           placeholder='Enter group name'
           name='name'
-          value={groupName}
-          onChange={handleChange}
+          value={requestGroupName}
+          onChange={handleRequestChange}
           required
           className='text-input'
         />
         <button type='submit' className='btn'>
-          Submit
+          Request
         </button>
-        <br />
-        {isSearching ? <SmallLoading /> : <p>{message}</p>}
+        {isRequesting ? <SmallLoading /> : <p>{requestMessage}</p>}
+      </form>
+      <form className='form-container' onSubmit={handleCreate}>
+        <label>or create your own group:</label>
+        <input
+          type='text'
+          placeholder='Enter group name'
+          name='name'
+          value={createGroupName}
+          onChange={handleCreateChange}
+          required
+          className='text-input'
+        />
+        <button type='submit' className='btn'>
+          Create
+        </button>
+        {isCreating ? <SmallLoading /> : <p>{createMessage}</p>}
       </form>
     </>
   )

@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -19,6 +20,7 @@ import {
   writeBatch,
   query,
   deleteDoc,
+  deleteField,
 } from 'firebase/firestore'
 import Hashids from 'hashids'
 
@@ -73,6 +75,11 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   return userDocRef
 }
 
+export const createAuthUserFromEmailAndPassword = async (email, password) => {
+  if (!email || !password) return
+  return await createUserWithEmailAndPassword(auth, email, password)
+}
+
 export const addCollectionAndDocuments = async (
   collectionKey,
   personsToAdd
@@ -117,7 +124,6 @@ export const removeStudentDocument = async (studentName) => {
   try {
     console.log(studentName)
     await deleteDoc(doc(db, 'students', studentName))
-    console.log(`Student document deleted: ${studentName}`)
   } catch (error) {
     console.log(error)
   }
@@ -173,6 +179,70 @@ export const removeRequestFromGroup = async (email, group) => {
   }
 }
 
+export const addSentRequestToUser = async (teacher, group) => {
+  const sentRequests = teacher.sentRequests || []
+  await updatePersonData('teachers', teacher, {
+    ...teacher,
+    sentRequests: [...sentRequests, group],
+  })
+}
+
+export const clearSentRequests = async (teacher) => {
+  await updatePersonData('teachers', teacher, { ...teacher, sentRequests: [] })
+}
+
+// export const deleteGroup = async (teacher, group) => {
+//   // get all requests to the group
+//   const groupDocRef = doc(db, 'groups', group)
+//   const groupSnapshot = await getDoc(groupDocRef)
+//   const requests = groupSnapshot.data().requests
+
+//   // remove the deleted group from each person's request list
+//   requests.forEach(async (request) =>  {
+//     const docRef = doc(db, 'teachers', request.email)
+//     const docSnapshot = await getDoc(docRef)
+//     const teacher = docSnapshot.data()
+//     const {sentRequests} = teacher
+//     const newSentRequests = sentRequests.filter(sentRequest => sentRequest !== request)
+//     await updateDoc(doc(db, 'teachers', request.email), {...teacher, newSentRequests})
+//   })
+
+//   // delete the group document
+//   await deleteDoc(doc(db, 'groups', group))
+// }
+
+export const createGroup = async (teacher, group) => {
+  const groupDocRef = doc(db, 'groups', group)
+  const groupSnapshot = await getDoc(groupDocRef)
+  if (groupSnapshot.exists()) {
+    throw Error('Group already exists.')
+  }
+  const collectionRef = collection(db, 'groups')
+  try {
+    const docRef = doc(collectionRef, group)
+
+    // instantiate group document
+    await setDoc(docRef, { requests: [] })
+
+    // remove sentRequests field in user
+    await updatePersonData('teachers', teacher, {
+      ...teacher,
+      group,
+      isAdmin: true,
+      sentRequests: deleteField(),
+    })
+
+    // Removing requests from all the groups they previously sent to
+    teacher.sentRequests.forEach((requestedGroup) => {
+      removeRequestFromGroup(teacher.email, requestedGroup)
+    })
+    return docRef
+  } catch (err) {
+    console.log(`Error creating group`, err)
+    throw new Error(`Error creating group`, err.message)
+  }
+}
+
 export const addRequestToGroup = async (teacher, group) => {
   const groupRef = doc(db, 'groups', group)
   const docSnapshot = await getDoc(groupRef)
@@ -189,6 +259,7 @@ export const addRequestToGroup = async (teacher, group) => {
   ]
   const newData = { ...docSnapshot.data(), requests: newRequests }
   await updateGroupData(group, newData)
+  await addSentRequestToUser(teacher, group)
   return newRequests
 }
 
@@ -248,19 +319,25 @@ export const updateDisplayName = (name) => {
     .catch((error) => console.log(error))
 }
 
-export const updatePersonData = (collectionKey, person, newData) => {
+export const updatePersonData = async (collectionKey, person, newData) => {
   switch (collectionKey) {
     case 'teachers':
       const teacherRef = doc(db, collectionKey, person.email)
-      updateDoc(teacherRef, newData)
-        .then(() => console.log(`Successfully updated profile`))
-        .catch((error) => console.log(error))
+      try {
+        await updateDoc(teacherRef, newData)
+        console.log(`Successfully updated profile`)
+      } catch (error) {
+        console.log(error)
+      }
       break
     case 'students':
       const studentRef = doc(db, collectionKey, person.name)
-      updateDoc(studentRef, newData)
-        .then(() => console.log(`Successfully updated profile`))
-        .catch((error) => console.log(error))
+      try {
+        await updateDoc(studentRef, newData)
+        console.log(`Successfully updated profile`)
+      } catch (error) {
+        console.log(error)
+      }
       break
     default:
       break

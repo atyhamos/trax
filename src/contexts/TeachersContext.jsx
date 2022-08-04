@@ -50,8 +50,7 @@ export const TeachersProvider = ({ children }) => {
 
   const updateTeacherData = (teacher, newData) => {
     const updatedTeacher = { ...teacher, ...newData }
-    updatePersonData('teachers', teacher, updatedTeacher)
-    getTeachersMap()
+    updatePersonData('teachers', teacher, updatedTeacher).then(getTeachersMap)
     console.log(`new teachersMap`)
   }
 

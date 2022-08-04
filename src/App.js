@@ -9,6 +9,7 @@ import { useContext } from 'react'
 import { UserContext } from './contexts/UserContext'
 import { TeachersContext } from './contexts/TeachersContext'
 import ProtectedRoute from './routes/protected-route/ProtectedRoute.component'
+import SignUp from './routes/sign up/SignUp.component'
 
 function App() {
   const { currentUser, signingIn } = useContext(UserContext)
@@ -21,11 +22,11 @@ function App() {
           path='sign-up'
           element={
             <ProtectedRoute
-              isAllowed={currentUser}
+              isAllowed={currentUser === null}
               loading={signingIn}
               redirectPath='/'
             >
-              <Dashboard />
+              <SignUp />
             </ProtectedRoute>
           }
         />
