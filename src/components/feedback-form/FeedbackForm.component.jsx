@@ -49,6 +49,7 @@ const FeedbackForm = ({ name, id, closeModal, children }) => {
             value={date}
             name='date'
             onChange={handleChange}
+            className='date'
           />
         </div>
         <div className='input-container'>

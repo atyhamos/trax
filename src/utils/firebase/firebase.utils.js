@@ -25,15 +25,15 @@ import {
 import Hashids from 'hashids'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyApwGVR9PLDDKLOZezOQBn97Es84CLI6CE',
-  authDomain: 'tya-records.firebaseapp.com',
-  projectId: 'tya-records',
-  storageBucket: 'tya-records.appspot.com',
-  messagingSenderId: '386364865134',
-  appId: '1:386364865134:web:9ce69d7ffb072b5654847f',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: 'trax-3f0b5.firebaseapp.com',
+  projectId: 'trax-3f0b5',
+  storageBucket: 'trax-3f0b5.appspot.com',
+  messagingSenderId: '948549316884',
+  appId: '1:948549316884:web:d567983dad3d65001bd201',
 }
 
-const app = initializeApp(firebaseConfig)
+initializeApp(firebaseConfig)
 const auth = getAuth()
 
 export const db = getFirestore()
@@ -65,9 +65,10 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     const isAdmin = false
     const name = email.split('@')[0]
     const group = ''
+    const sentRequests = []
     try {
       const docRef = doc(collectionRef, email)
-      await setDoc(docRef, { email, id, isAdmin, name, group })
+      await setDoc(docRef, { email, id, isAdmin, name, group, sentRequests })
     } catch (error) {
       console.log('Error creating user', error.message)
     }

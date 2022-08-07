@@ -1,6 +1,5 @@
 .dashboard-container {
   margin: 0 auto;
-  width: 90%;
   @media (min-width: 767px) {
     max-width: 1500px;
   }
@@ -30,7 +29,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.082);
+  background: rgba(0, 0, 0, 0.034);
   justify-content: space-evenly;
 
   @media (min-width: 767px) {

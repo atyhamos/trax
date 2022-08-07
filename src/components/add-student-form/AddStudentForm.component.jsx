@@ -22,7 +22,7 @@ const AddStudentForm = ({ closeModal, group, children }) => {
     setFormData({ ...formData, [name]: value })
   }
   return (
-    <div className='form-container'>
+    <div className='form-container add-student'>
       <span className='close-form-button' onClick={closeModal}>
         &#10005; <span>Close Form</span>
       </span>
@@ -39,11 +39,12 @@ const AddStudentForm = ({ closeModal, group, children }) => {
             value={name}
             name='name'
             onChange={handleChange}
+            className='text-input'
+            placeholder='Enter name'
           />
         </div>
         <div className='input-container'>
           <label htmlFor='level'>Level</label>
-
           <input
             type='text'
             required
@@ -51,6 +52,8 @@ const AddStudentForm = ({ closeModal, group, children }) => {
             value={level}
             name='level'
             onChange={handleChange}
+            className='text-input'
+            placeholder='Enter level (K1, P1 or others)'
           />
         </div>
 

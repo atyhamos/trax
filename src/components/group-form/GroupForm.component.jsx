@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { TeachersContext } from '../../contexts/TeachersContext'
+import React, { useState } from 'react'
 import {
   addRequestToGroup,
   createGroup,
@@ -70,42 +69,46 @@ const GroupForm = ({ teacher }) => {
   }
 
   return (
-    <>
-      <form className='form-container' onSubmit={handleRequest}>
-        <h2>Dear {teacher.name},</h2>
-        <p>You do not belong to a group.</p>
-        <label>Request to join a group:</label>
-        <input
-          type='text'
-          placeholder='Enter group name'
-          name='name'
-          value={requestGroupName}
-          onChange={handleRequestChange}
-          required
-          className='text-input'
-        />
-        <button type='submit' className='btn'>
-          Request
-        </button>
-        {isRequesting ? <SmallLoading /> : <p>{requestMessage}</p>}
-      </form>
-      <form className='form-container' onSubmit={handleCreate}>
-        <label>or create your own group:</label>
-        <input
-          type='text'
-          placeholder='Enter group name'
-          name='name'
-          value={createGroupName}
-          onChange={handleCreateChange}
-          required
-          className='text-input'
-        />
-        <button type='submit' className='btn'>
-          Create
-        </button>
-        {isCreating ? <SmallLoading /> : <p>{createMessage}</p>}
-      </form>
-    </>
+    <div className='dashboard-page-no-group body-container'>
+      <h1>Dear {teacher.name},</h1>
+      <p>
+        You <span>do not</span> belong to a group yet.
+      </p>
+      <div className='group-forms-container'>
+        <form className='form-container group-form' onSubmit={handleRequest}>
+          <label>Request to join a group:</label>
+          <input
+            type='text'
+            placeholder='Enter group name'
+            name='name'
+            value={requestGroupName}
+            onChange={handleRequestChange}
+            required
+            className='text-input'
+          />
+          <button type='submit' className='btn'>
+            Request
+          </button>
+          {isRequesting ? <SmallLoading /> : <p>{requestMessage}</p>}
+        </form>
+        <form className='form-container  group-form' onSubmit={handleCreate}>
+          <label>or create your own group:</label>
+          <input
+            type='text'
+            placeholder='Enter group name'
+            name='name'
+            value={createGroupName}
+            onChange={handleCreateChange}
+            required
+            className='text-input'
+          />
+          <button type='submit' className='btn'>
+            Create
+          </button>
+          {isCreating ? <SmallLoading /> : <p>{createMessage}</p>}
+        </form>
+      </div>
+    </div>
   )
 }
 

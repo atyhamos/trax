@@ -1,14 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import './SignUp.component.scss'
 import {
   createAuthUserFromEmailAndPassword,
   createUserDocumentFromAuth,
-  signInWithAuthEmailAndPassword,
-  signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils'
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SmallLoading } from '../../components/loading/Loading.component'
-import { UserContext } from '../../contexts/UserContext'
 
 const initialFormData = {
   email: '',
@@ -51,37 +47,46 @@ const SignUp = () => {
   }
 
   return (
-    <div className='login-container'>
-      <h1>Trax</h1>
+    <div className='auth-container body-container'>
+      <div className='logo' />
       <form onSubmit={handleSubmit}>
-        <p>Efficiently track your students' learning</p>
-        <input
-          type='email'
-          required
-          placeholder='Email'
-          name='email'
-          value={email}
-          onChange={handleChange}
-          className='text-input'
-        ></input>
-        <input
-          type='password'
-          required
-          placeholder='Password'
-          name='password'
-          value={password}
-          onChange={handleChange}
-          className='text-input'
-        ></input>
-        <input
-          type='password'
-          required
-          placeholder='Confirm Password'
-          name='confirmPassword'
-          value={confirmPassword}
-          onChange={handleChange}
-          className='text-input'
-        ></input>
+        <h2>Track your students' progress, easily.</h2>
+        <div className='form-input'>
+          <label htmlFor='email'>Email Address</label>
+          <input
+            type='email'
+            required
+            placeholder='Email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            className='text-input'
+          ></input>
+        </div>
+        <div className='form-input'>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            required
+            placeholder='Password'
+            name='password'
+            value={password}
+            onChange={handleChange}
+            className='text-input'
+          ></input>
+        </div>
+        <div className='form-input'>
+          <label htmlFor='password'>Confirm Password</label>
+          <input
+            type='password'
+            required
+            placeholder='Confirm Password'
+            name='confirmPassword'
+            value={confirmPassword}
+            onChange={handleChange}
+            className='text-input'
+          ></input>
+        </div>
         <button
           className='login-btn signup-btn'
           type='submit'

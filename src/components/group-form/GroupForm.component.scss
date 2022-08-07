@@ -1,0 +1,46 @@
+.dashboard-page-no-group {
+  text-align: center;
+  h1 {
+    margin-top: 2em;
+  }
+  span {
+    font-weight: bold;
+  }
+}
+
+.group-form {
+  text-align: left;
+  label {
+    display: block;
+    margin-bottom: 1em;
+  }
+  .text-input {
+    width: 100%;
+  }
+}
+
+@media (min-width: 767px) {
+  .dashboard-page-no-group {
+    h1 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  .group-forms-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .group-form {
+      width: 40%;
+      display: flex;
+      text-align: left;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <>
       {currentTeacher.group ? (
-        <div className='dashboard-container'>
+        <div className='body-container dashboard-container'>
           <h1>
             <span>Welcome,</span> {name}
           </h1>

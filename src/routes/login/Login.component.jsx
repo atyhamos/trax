@@ -47,51 +47,64 @@ const Login = () => {
   const handleGoogleSignIn = async (event) => {
     event.preventDefault()
     setIsLoading(true)
-    const user = await signInWithGooglePopup()
-    if (user) {
-      navigate('dashboard')
+    try {
+      const user = await signInWithGooglePopup()
+      if (user) {
+        navigate('dashboard')
+      }
+    } catch (error) {
+      if (error.code !== 'auth/popup-closed-by-user') {
+        alert(error.message)
+      }
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   return (
-    <div className='login-container'>
-      <h1>Trax</h1>
+    <div className='auth-container body-container'>
+      <div className='logo' />
       <form onSubmit={handleSubmit}>
-        <p>Efficiently track your students' learning</p>
-        <input
-          type='email'
-          required
-          placeholder='Email'
-          name='email'
-          value={email}
-          onChange={handleChange}
-          className='text-input'
-        ></input>
-        <input
-          type='password'
-          required
-          placeholder='Password'
-          name='password'
-          value={password}
-          onChange={handleChange}
-          className='text-input'
-        ></input>
+        <h2>Track your students' progress, easily.</h2>
+        <div className='form-input'>
+          <label htmlFor='email'>Email Address</label>
+          <input
+            type='email'
+            required
+            placeholder='Email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            className='text-input'
+          ></input>
+        </div>
+        <div className='form-input'>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            required
+            placeholder='Password'
+            name='password'
+            value={password}
+            onChange={handleChange}
+            className='text-input'
+          ></input>
+        </div>
         <button className='login-btn' type='submit' disabled={isLoading}>
           Login
         </button>
-        {isLoading && <SmallLoading />}
         <button className='login-btn google-btn' onClick={handleGoogleSignIn}>
           <img
             className='google-logo'
             src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg'
+            alt='google icon'
           />
           <span>Sign-in with Google</span>
         </button>
-        <hr />
         <Link to='sign-up' className='login-btn signup-btn'>
           <span>Sign Up</span>
         </Link>
+        {isLoading && <SmallLoading />}
       </form>
     </div>
   )

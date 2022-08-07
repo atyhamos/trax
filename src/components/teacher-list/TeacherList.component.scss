@@ -7,17 +7,13 @@
   h3 {
     font-size: 1.6rem;
   }
-  @media (min-width: 762px) {
+  @media (min-width: 767px) {
     max-width: 800px;
     margin-left: auto;
   }
 }
 
 .headings-container {
-  display: grid;
-  justify-content: space-evenly;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas: 'name level';
   padding: 0 1em;
   background-color: rgba(250, 203, 150, 0.466);
   margin-bottom: 1em;

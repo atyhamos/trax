@@ -6,9 +6,9 @@ const PersonPreview = ({ person, request = [] }) => {
   const [handleAccept, handleReject] = request
   const isRequest = request.length > 0
   const teacher = { email, id }
-  // Avoid showing pointer on requests
+  // Disable pointer on requests
   const linkStyles = {
-    cursor: `${isRequest ? 'pointer' : 'auto'}`,
+    cursor: `${isRequest ? 'auto' : 'pointer'}`,
   }
 
   return (

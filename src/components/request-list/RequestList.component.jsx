@@ -52,8 +52,7 @@ const RequestList = () => {
       <div className='table-container'>
         {isLoading ? (
           <BigLoading />
-        ) : (
-          requests.length > 0 &&
+        ) : requests.length > 0 ? (
           requests.map((teacher) => (
             <PersonPreview
               key={teacher.id}
@@ -61,6 +60,8 @@ const RequestList = () => {
               request={[handleAccept, handleReject]}
             />
           ))
+        ) : (
+          <p>There are no current requests to join your group.</p>
         )}
       </div>
     </div>

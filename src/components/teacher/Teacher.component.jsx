@@ -15,7 +15,7 @@ const Teacher = () => {
     return <BigLoading />
   }
   console.log(teachersIdMap)
-  const selectedTeacher = teachersIdMap.get(Number(teacherId))
+  const selectedTeacher = teachersIdMap.get(teacherId)
 
   const toggleForm = () => {
     setIsEditingProfile(!isEditingProfile)

@@ -3,18 +3,16 @@
   width: 80%;
   .student-list-header-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     h2 {
       font-size: 2.5rem;
-
-      margin-bottom: 0;
     }
     .buttons-container {
-      align-self: flex-start;
-      margin-bottom: 0.5em;
+      align-self: center;
     }
     .list-button {
-      margin-right: 1em;
+      margin-left: 1em;
       color: white;
       font-size: 1.2rem;
       font-weight: bold;
@@ -23,12 +21,12 @@
     }
     .list-button:hover,
     .list-button:focus {
-      background: darkgreen;
+      background: rgb(23, 102, 23);
     }
     .add-student-button {
       padding: 0.75em 1em;
 
-      background: green;
+      background: rgb(70, 165, 70);
     }
     .add-student-button:hover,
     .add-student-button:focus {
@@ -36,11 +34,11 @@
     }
     .remove-student-button {
       padding: 0.75em 1.15em;
-      background: red;
+      background: rgb(194, 60, 60);
     }
     .remove-student-button:hover,
     .remove-student-button:focus {
-      background: darkred;
+      background: rgb(165, 18, 18);
     }
   }
   h3 {
@@ -72,7 +70,7 @@
 .person-level-label:hover,
 .person-name-label:focus,
 .person-level-label:focus {
-  color: darkcyan;
+  color: rgb(40, 119, 119);
 }
 
 .person-name-label {

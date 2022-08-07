@@ -65,10 +65,10 @@ const Student = () => {
             {name} - {level}
           </h2>
           <div className='average-score'>
-            👍Behaviour: <span>{averageBehaviour.toFixed(2)}/5</span>
+            Behaviour: <span>{averageBehaviour.toFixed(2)}/5</span>
           </div>
           <div className='average-score'>
-            📚Academics: <span>{averageAcademics.toFixed(2)}/5</span>
+            Academics: <span>{averageAcademics.toFixed(2)}/5</span>
           </div>
           <button className='student-feedback-button' onClick={toggleForm}>
             Write feedback
@@ -76,7 +76,7 @@ const Student = () => {
         </div>
         <div className='student-feedback-container'>
           <div className='student-feedback-header'>
-            <span className='description'>Comments✍️</span>
+            <span className='description'>Comments</span>
             <span className='behaviour'>👍</span>
             <span className='academics'>📚</span>
             <span className='date'>📅</span>

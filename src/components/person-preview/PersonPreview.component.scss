@@ -4,17 +4,18 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  background: rgb(255, 255, 255);
   padding: 1em;
-  border: 1px solid black;
+  // border: 1px solid black;
   scale: 1;
   transition: scale 0.25s;
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .person-preview-container:hover,
 .person-preview-container:focus {
-  background-color: rgba(187, 186, 186, 0.61);
-  cursor: pointer;
-  scale: 1.05;
+  background-color: rgba(187, 186, 186, 0.226);
+  scale: 1.025;
 }
