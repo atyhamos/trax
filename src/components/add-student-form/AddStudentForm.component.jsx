@@ -53,7 +53,7 @@ const AddStudentForm = ({ closeModal, group, children }) => {
             name='level'
             onChange={handleChange}
             className='text-input'
-            placeholder='Enter level (K1, P1 or others)'
+            placeholder='Enter level (K1, P1 etc)'
           />
         </div>
 

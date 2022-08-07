@@ -90,21 +90,29 @@ const Login = () => {
             className='text-input'
           ></input>
         </div>
-        <button className='login-btn' type='submit' disabled={isLoading}>
-          Login
-        </button>
-        <button className='login-btn google-btn' onClick={handleGoogleSignIn}>
-          <img
-            className='google-logo'
-            src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg'
-            alt='google icon'
-          />
-          <span>Sign-in with Google</span>
-        </button>
-        <Link to='sign-up' className='login-btn signup-btn'>
-          <span>Sign Up</span>
-        </Link>
-        {isLoading && <SmallLoading />}
+        {isLoading ? (
+          <SmallLoading />
+        ) : (
+          <>
+            <button className='login-btn' type='submit' disabled={isLoading}>
+              Login
+            </button>
+            <button
+              className='login-btn google-btn'
+              onClick={handleGoogleSignIn}
+            >
+              <img
+                className='google-logo'
+                src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg'
+                alt='google icon'
+              />
+              <span>Sign-in with Google</span>
+            </button>
+            <Link to='sign-up' className='login-btn signup-btn'>
+              <span>Sign Up</span>
+            </Link>
+          </>
+        )}
       </form>
     </div>
   )

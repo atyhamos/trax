@@ -12,7 +12,7 @@
       align-self: center;
     }
     .list-button {
-      margin-left: 1em;
+      margin-left: 0.2em;
       color: white;
       font-size: 1.2rem;
       font-weight: bold;
@@ -24,8 +24,7 @@
       background: rgb(23, 102, 23);
     }
     .add-student-button {
-      padding: 0.75em 1em;
-
+      padding: 0.5em 0.75em;
       background: rgb(70, 165, 70);
     }
     .add-student-button:hover,
@@ -33,7 +32,7 @@
       background: darkgreen;
     }
     .remove-student-button {
-      padding: 0.75em 1.15em;
+      padding: 0.5em 0.8em;
       background: rgb(194, 60, 60);
     }
     .remove-student-button:hover,
