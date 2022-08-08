@@ -20,7 +20,7 @@ const PersonPreview = ({ person, request = [] }) => {
       style={linkStyles}
     >
       {/* If request, show email instead */}
-      <div>{isRequest ? email : name}</div>
+      <div className='person-identifier'>{isRequest ? email : name}</div>
 
       {/* For students, show level */}
       {level && <div>{level}</div>}
@@ -28,8 +28,20 @@ const PersonPreview = ({ person, request = [] }) => {
       {/* For requests */}
       {isRequest && (
         <div>
-          <button onClick={() => handleAccept(teacher)}>Accept</button>
-          <button onClick={() => handleReject(teacher)}>Reject</button>
+          <button
+            className='request-action-btn'
+            onClick={() => handleAccept(teacher)}
+            style={{ color: 'green' }}
+          >
+            ✓
+          </button>
+          <button
+            className='request-action-btn'
+            onClick={() => handleReject(teacher)}
+            style={{ color: 'red' }}
+          >
+            ✕
+          </button>
         </div>
       )}
     </Link>

@@ -1,5 +1,5 @@
 .person-preview-container {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5em;
   display: flex;
   align-items: baseline;
@@ -12,6 +12,21 @@
   text-decoration: none;
   color: black;
   cursor: pointer;
+  .person-identifier {
+    max-width: 50%;
+  }
+  .request-action-btn {
+    cursor: pointer;
+    border: none;
+    margin-left: 1em;
+    padding: 0 0.25em;
+    font-size: 1.4rem;
+    background-color: #f5f5f5;
+  }
+  .request-action-btn:hover,
+  .request-action-btn:focus {
+    background: #fefefe;
+  }
 }
 
 .person-preview-container:hover,

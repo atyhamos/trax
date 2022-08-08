@@ -6,7 +6,9 @@
   align-items: center;
   height: 100vh;
   img {
-    width: 80%;
+    border-radius: 50%;
+    
+    width: 70%;
     max-width: 400px;
   }
   .average-score {
@@ -66,8 +68,7 @@
   transition: opacity 0.25s ease-in-out;
   position: absolute;
   z-index: 1;
-  left: -100%;
-  top: 130%;
+  bottom: -2em;
 }
 
 .behaviour:hover:before,

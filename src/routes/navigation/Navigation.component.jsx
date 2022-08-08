@@ -21,18 +21,20 @@ const Navigation = () => {
   return (
     <>
       {currentUser && (
-        <div className='nav-bar'>
-          <Link to='/dashboard'>
-            <span className='nav-bar-hover'>Home</span>
-          </Link>
-          {currentTeacher && currentTeacher.isAdmin && (
-            <Link to='/admin'>
-              <span className='nav-bar-hover'>Admin</span>
+        <div className='nav-bar-container'>
+          <div className='nav-bar'>
+            <Link to='/dashboard'>
+              <span className='nav-bar-hover'>Home</span>
             </Link>
-          )}
-          <span onClick={handleSignOut}>
-            <span className='nav-bar-hover'>Sign out</span>
-          </span>
+            {currentTeacher && currentTeacher.isAdmin && (
+              <Link to='/admin'>
+                <span className='nav-bar-hover'>Admin</span>
+              </Link>
+            )}
+            <span onClick={handleSignOut}>
+              <span className='nav-bar-hover'>Sign out</span>
+            </span>
+          </div>
         </div>
       )}
       <Outlet />

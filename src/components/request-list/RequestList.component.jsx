@@ -48,7 +48,6 @@ const RequestList = () => {
       <div className='headings-container'>
         <h3 className='person-name-label'>Name</h3>
       </div>
-      {/* {!teachersMap.size && <BigLoading />} */}
       <div className='table-container'>
         {isLoading ? (
           <BigLoading />

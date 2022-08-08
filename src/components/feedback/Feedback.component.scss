@@ -36,6 +36,12 @@
     text-overflow: ellipsis;
     overflow-y: hidden;
   }
+
+  @media (min-width: 672px) {
+    .description {
+      max-width: 100%;
+    }
+  }
   .description-full {
     max-height: 100%;
   }
