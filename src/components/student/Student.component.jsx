@@ -2,7 +2,6 @@ import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { StudentsContext } from '../../contexts/StudentsContext'
 import BlankPicture from '../../images/blank-profile.svg'
-import GirlStockImage from '../../images/female-stock.jpg'
 import FeedbackForm from '../feedback-form/FeedbackForm.component'
 import Feedback from '../feedback/Feedback.component'
 import { BigLoading } from '../loading/Loading.component'
@@ -61,7 +60,7 @@ const Student = () => {
       )}
       <div className='student-container body-container'>
         <div className='student-info-container'>
-          <img src={GirlStockImage} alt={name} />
+          <img src={BlankPicture} alt={name} />
           <h2>
             {name} - {level}
           </h2>
