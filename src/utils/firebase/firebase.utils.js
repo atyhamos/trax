@@ -23,6 +23,7 @@ import {
   deleteField,
 } from 'firebase/firestore'
 import Hashids from 'hashids'
+import { hashString } from '../hash/hash.utils'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -95,16 +96,17 @@ export const addCollectionAndDocuments = async (
 }
 
 export const addStudentDocument = async (student, group) => {
-  const studentDocRef = doc(db, 'students', student.name)
+  const studentHash = hashString(`${student.name} - ${group}`)
+  console.log(studentHash)
+  const studentDocRef = doc(db, 'students', studentHash.toString())
   const studentSnapshot = await getDoc(studentDocRef)
   if (studentSnapshot.exists()) {
-    throw Error('Student already exists.')
+    throw new Error('Student already exists.')
   }
   const collectionRef = collection(db, 'students')
-  const hashids = new Hashids()
-  const id = hashids.encode(Date.now())
+  const id = studentHash
   try {
-    const docRef = doc(collectionRef, student.name)
+    const docRef = doc(collectionRef, id.toString())
     const studentData = {
       ...student,
       group,
@@ -117,7 +119,7 @@ export const addStudentDocument = async (student, group) => {
     await setDoc(docRef, studentData)
     return studentData
   } catch (error) {
-    console.log('Error creating user', error.message)
+    throw new Error('Error creating user', error.message)
   }
 }
 

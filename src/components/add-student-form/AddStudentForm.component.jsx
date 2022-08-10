@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './AddStudentForm.component.scss'
 import { useContext } from 'react'
 import { StudentsContext } from '../../contexts/StudentsContext'
+import { SmallLoading } from '../loading/Loading.component'
 
 const defaultFormData = {
   name: '',
@@ -12,10 +13,14 @@ const AddStudentForm = ({ closeModal, group, children }) => {
   const [formData, setFormData] = useState(defaultFormData)
   const { addStudent } = useContext(StudentsContext)
   const { name, level } = formData
+  const [isLoading, setIsLoading] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault()
-    addStudent(formData, group)
-    closeModal()
+    setIsLoading(true)
+    addStudent(formData, group).then(() => {
+      closeModal()
+      setIsLoading(false)
+    })
   }
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -57,9 +62,13 @@ const AddStudentForm = ({ closeModal, group, children }) => {
           />
         </div>
 
-        <button type='submit' className='btn'>
-          Submit
-        </button>
+        {isLoading ? (
+          <SmallLoading />
+        ) : (
+          <button type='submit' className='btn'>
+            Submit
+          </button>
+        )}
       </form>
     </div>
   )

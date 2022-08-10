@@ -109,13 +109,17 @@ export const StudentsProvider = ({ children }) => {
     setStudentSize(-1)
   }
 
-  const addStudent = (student, group) => {
-    addStudentDocument(student, group).then((newStudent) => {
+  const addStudent = async (student, group) => {
+    try {
+      const newStudent = await addStudentDocument(student, group)
       const newStudentsMap = new Map(studentsMap.set(newStudent.id, newStudent))
       console.log(newStudentsMap)
       setStudentsMap(newStudentsMap)
-    })
+    } catch (error) {
+      alert(error.message)
+    }
   }
+
   const removeStudent = async (studentId) => {
     const studentToDelete = studentsMap.get(studentId).name
     await removeStudentDocument(studentToDelete)

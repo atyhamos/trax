@@ -14,7 +14,7 @@ const Student = () => {
   const [feedbackToDelete, setFeedbackToDelete] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const studentId = useParams().id
-  const student = studentsMap.get(studentId)
+  const student = studentsMap.get(Number(studentId))
   if (!student) {
     return <BigLoading />
   }
