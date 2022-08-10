@@ -123,17 +123,16 @@ export const addStudentDocument = async (student, group) => {
   }
 }
 
-export const removeStudentDocument = async (studentName) => {
+export const removeStudentDocument = async (studentId) => {
   try {
-    console.log(studentName)
-    await deleteDoc(doc(db, 'students', studentName))
+    await deleteDoc(doc(db, 'students', studentId.toString()))
   } catch (error) {
     console.log(error)
   }
 }
 
 export const addFeedbackToStudent = async (student, newData) => {
-  const studentRef = doc(db, 'students', student.name)
+  const studentRef = doc(db, 'students', student.id.toString())
   await updateDoc(studentRef, newData)
 }
 
@@ -334,7 +333,7 @@ export const updatePersonData = async (collectionKey, person, newData) => {
       }
       break
     case 'students':
-      const studentRef = doc(db, collectionKey, person.name)
+      const studentRef = doc(db, collectionKey, person.id.toString())
       try {
         await updateDoc(studentRef, newData)
         console.log(`Successfully updated profile`)

@@ -121,8 +121,7 @@ export const StudentsProvider = ({ children }) => {
   }
 
   const removeStudent = async (studentId) => {
-    const studentToDelete = studentsMap.get(studentId).name
-    await removeStudentDocument(studentToDelete)
+    await removeStudentDocument(studentId)
     studentsMap.delete(studentId)
     setStudentsMap(new Map(studentsMap))
     console.log(studentsMap)
