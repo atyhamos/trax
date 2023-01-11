@@ -8,6 +8,13 @@
   justify-content: center;
   height: 80vh;
   img {
-    width: 220px;
+    width: 70%;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 767px) {
+  img {
+    max-width: 800px;
   }
 }

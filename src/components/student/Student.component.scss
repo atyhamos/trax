@@ -6,8 +6,6 @@
   align-items: center;
   height: 100vh;
   img {
-    border-radius: 50%;
-    
     width: 70%;
     max-width: 400px;
   }
@@ -156,7 +154,7 @@
 @media (min-width: 767px) {
   .student-container {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
 
     img {

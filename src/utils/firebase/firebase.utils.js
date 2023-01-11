@@ -22,6 +22,7 @@ import {
   deleteDoc,
   deleteField,
 } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 import Hashids from 'hashids'
 import { hashString } from '../hash/hash.utils'
 
@@ -34,9 +35,9 @@ const firebaseConfig = {
   appId: '1:948549316884:web:d567983dad3d65001bd201',
 }
 
-initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig)
 const auth = getAuth()
-
+export const storage = getStorage(app)
 export const db = getFirestore()
 
 // Sign in using a popup.
@@ -235,9 +236,10 @@ export const createGroup = async (teacher, group) => {
     })
 
     // Removing requests from all the groups they previously sent to
-    teacher.sentRequests.forEach((requestedGroup) => {
-      removeRequestFromGroup(teacher.email, requestedGroup)
-    })
+    teacher.sentRequests &&
+      teacher.sentRequests.forEach((requestedGroup) => {
+        removeRequestFromGroup(teacher.email, requestedGroup)
+      })
     return docRef
   } catch (err) {
     console.log(`Error creating group`, err)

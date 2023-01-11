@@ -1,18 +1,27 @@
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { StudentsContext } from '../../contexts/StudentsContext'
+import { TeachersContext } from '../../contexts/TeachersContext'
 import BlankPicture from '../../images/blank-profile.svg'
 import FeedbackForm from '../feedback-form/FeedbackForm.component'
 import Feedback from '../feedback/Feedback.component'
 import { BigLoading } from '../loading/Loading.component'
+import { storage } from '../../utils/firebase/firebase.utils'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+
 import './Student.component.scss'
 
 const Student = () => {
   const { studentsMap, deleteFeedbackFromStudent } = useContext(StudentsContext)
+  const { currentTeacher } = useContext(TeachersContext)
+
   const [isDeletingFeedback, setIsDeletingFeedback] = useState(false)
   const [isWritingFeedback, setIsWritingFeedback] = useState(false)
   const [feedbackToDelete, setFeedbackToDelete] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const [image, setImage] = useState(null)
+  const [url, setUrl] = useState(null)
+
   const studentId = useParams().id
   const student = studentsMap.get(Number(studentId))
   if (!student) {
@@ -20,6 +29,45 @@ const Student = () => {
   }
   const { name, id, level, feedbackList, averageBehaviour, averageAcademics } =
     student
+
+  if (name) {
+    const imageRef = ref(storage, name + id)
+    getDownloadURL(imageRef)
+      .then((url) => {
+        setUrl(url)
+        console.log('Profile picture found')
+      })
+      .catch((error) => {
+        console.log(error.message, 'No profile picture found')
+        setUrl(BlankPicture)
+      })
+  }
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
+  }
+  const handleSubmit = () => {
+    if (!image) return
+    const imageRef = ref(storage, name + id)
+    uploadBytes(imageRef, image)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((url) => {
+            setUrl(url)
+          })
+          .catch((error) => {
+            console.log(error.message, 'Error getting the image URL')
+            setUrl(BlankPicture)
+          })
+        setImage(null)
+      })
+      .catch((error) => {
+        console.log(error.message, 'Error getting the image URL')
+        setUrl(BlankPicture)
+      })
+  }
 
   const toggleForm = () => setIsWritingFeedback(!isWritingFeedback)
   const toggleModal = (feedback) => {
@@ -60,7 +108,15 @@ const Student = () => {
       )}
       <div className='student-container body-container'>
         <div className='student-info-container'>
-          <img src={BlankPicture} alt={name} />
+          {!url ? <BigLoading /> : <img src={url} alt={name} />}
+          {currentTeacher.isAdmin && (
+            <div>
+              <input type='file' onChange={handleImageChange} />
+              <button className='btn' onClick={handleSubmit}>
+                Change Picture
+              </button>
+            </div>
+          )}
           <h2>
             {name} - {level}
           </h2>

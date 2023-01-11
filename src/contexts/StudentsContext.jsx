@@ -33,7 +33,7 @@ export const StudentsProvider = ({ children }) => {
       }
     }
     getStudentsMap()
-    console.log('Running useEffect: studentsMap')
+    // console.log('Running useEffect: studentsMap')
   }, [currentTeacher])
 
   const calculateScores = (studentComments) => {
@@ -84,8 +84,8 @@ export const StudentsProvider = ({ children }) => {
   }
 
   const deleteFeedbackFromStudent = async (student, feedbackToDelete) => {
-    console.log('deleting feedback from student')
-    console.log(feedbackToDelete)
+    // console.log('deleting feedback from student')
+    // console.log(feedbackToDelete)
     const feedbackList = student.feedbackList.filter(
       (feedback) => feedback.id !== feedbackToDelete.id
     )
@@ -99,7 +99,7 @@ export const StudentsProvider = ({ children }) => {
     updatePersonData('students', student, newData)
     const newStudentsMap = new Map(studentsMap)
     newStudentsMap.set(student.id, newData)
-    console.log(newData)
+    // console.log(newData)
     setStudentsMap(newStudentsMap)
     setStudentSize(newStudentsMap.size)
   }
@@ -113,7 +113,7 @@ export const StudentsProvider = ({ children }) => {
     try {
       const newStudent = await addStudentDocument(student, group)
       const newStudentsMap = new Map(studentsMap.set(newStudent.id, newStudent))
-      console.log(newStudentsMap)
+      // console.log(newStudentsMap)
       setStudentsMap(newStudentsMap)
     } catch (error) {
       alert(error.message)
@@ -124,7 +124,7 @@ export const StudentsProvider = ({ children }) => {
     await removeStudentDocument(studentId)
     studentsMap.delete(studentId)
     setStudentsMap(new Map(studentsMap))
-    console.log(studentsMap)
+    // console.log(studentsMap)
   }
 
   const value = {

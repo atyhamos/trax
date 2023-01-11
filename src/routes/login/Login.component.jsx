@@ -24,7 +24,7 @@ const Login = () => {
 
   useEffect(() => {
     if (currentUser) {
-      console.log(currentUser)
+      // console.log(currentUser)
       navigate('dashboard')
     }
   })

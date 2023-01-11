@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
       setCurrentUser(user)
       setsigningIn(false)
     })
-    console.log('Running useEffect: UserProvider')
+    // console.log('Running useEffect: UserProvider')
     return unsubscribe
   }, [])
 

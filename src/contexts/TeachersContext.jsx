@@ -21,7 +21,7 @@ export const TeachersProvider = ({ children }) => {
   }
   useEffect(() => {
     setTimeout(getTeachersMap, 3000)
-    console.log('Running useEffect: teachersMap')
+    // console.log('Running useEffect: teachersMap')
   }, [currentUser])
 
   useEffect(() => {
@@ -34,8 +34,8 @@ export const TeachersProvider = ({ children }) => {
         new Map()
       )
       setTeachersIdMap(newTeachersIdMap)
-      console.log('new teachersIdMap')
-      console.log(newTeachersIdMap)
+      // console.log('new teachersIdMap')
+      // console.log(newTeachersIdMap)
     }
   }, [teachersMap])
 
@@ -43,7 +43,7 @@ export const TeachersProvider = ({ children }) => {
     if (teachersMap && teachersMap.size && currentUser) {
       setCurrentTeacher(teachersMap.get(currentUser.email))
     } else {
-      console.log('resetting current teacher')
+      // console.log('resetting current teacher')
       setCurrentTeacher({})
     }
   }, [teachersMap, currentUser])
@@ -51,7 +51,7 @@ export const TeachersProvider = ({ children }) => {
   const updateTeacherData = (teacher, newData) => {
     const updatedTeacher = { ...teacher, ...newData }
     updatePersonData('teachers', teacher, updatedTeacher).then(getTeachersMap)
-    console.log(`new teachersMap`)
+    // console.log(`new teachersMap`)
   }
 
   const resetTeachersContext = () => {
