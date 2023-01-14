@@ -106,7 +106,7 @@ const Student = () => {
           </div>
         </div>
       )}
-      <div className='student-container body-container'>
+      <div className='student-container'>
         <div className='student-info-container'>
           {!url ? <BigLoading /> : <img src={url} alt={name} />}
           {currentTeacher.isAdmin && (
