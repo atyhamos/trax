@@ -18,20 +18,26 @@ const StudentList = () => {
   const { currentTeacher } = useContext(TeachersContext)
   const [isAddingStudent, setIsAddingStudent] = useState(false)
   const [isRemovingStudent, setIsRemovingStudent] = useState(false)
-  const [currentSortOrder, setCurrentSortOrder] = useState(ascLevelOrder)
+  const [currentSortOrder, setCurrentSortOrder] = useState(() => {
+    return null
+  })
   const [sortedStudentsArray, setSortedStudentsArray] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const getSortedStudentsArray = () => {
+  const getSortedStudentsArray = (sortOrder) => {
     const studentsArray = Array.from(studentsMap).map(
       ([id, student]) => student
     )
-    studentsArray.sort(currentSortOrder)
+    studentsArray.sort(sortOrder)
     return studentsArray
   }
 
   useEffect(() => {
-    setSortedStudentsArray(getSortedStudentsArray())
+    if (!sortedStudentsArray.length) {
+      setSortedStudentsArray(getSortedStudentsArray(ascLevelOrder))
+    } else {
+      setSortedStudentsArray(sortedStudentsArray.sort(currentSortOrder))
+    }
   }, [studentsMap, currentSortOrder])
 
   useEffect(() => {

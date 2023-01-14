@@ -26,8 +26,8 @@ const Feedback = ({ feedback, toggleModal }) => {
         {!isExpanded ? (
           <p className='description'>
             {description
-              ? description.length > 50
-                ? description.slice(0, 49) + '-'
+              ? description.length > 300
+                ? description.slice(0, 299) + '-'
                 : description
               : 'No comment'}
           </p>
@@ -37,7 +37,7 @@ const Feedback = ({ feedback, toggleModal }) => {
         <span className='behaviour hovertext'>{behaviour}</span>
         <span className='academics'>{academics}</span>
         <span className='date'>{formatDate(date)}</span>
-        {description.length > 50 && (
+        {description.length > 300 && (
           <span className='expand' onClick={expandHandler}>
             {isExpanded ? 'see less...' : 'see more...'}
           </span>

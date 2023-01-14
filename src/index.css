@@ -10,11 +10,12 @@ body {
   background-color: #f5f5f5;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothifng: grayscale;
 }
 
 .body-container {
   width: 90%;
+  overflow-x: hidden;
   margin: 0 auto;
 }
 
@@ -29,6 +30,9 @@ code {
 
 @media (min-width: 767px) {
   html {
+    font-size: 1.1rem;
+  }
+  .description {
     font-size: 1.1rem;
   }
 }

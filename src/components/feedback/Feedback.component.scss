@@ -17,7 +17,7 @@
   align-items: center;
   background: white;
   min-height: 2em;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   padding: 0.5em;
   margin-bottom: 1em;
   scale: 1;
@@ -28,10 +28,11 @@
     top: 0;
     margin-top: 0.5em;
   }
+
   .description {
     text-align: left;
     max-width: 400px;
-    max-height: 8em;
+    // max-height: 8em;
     word-wrap: break-word;
     text-overflow: ellipsis;
     overflow-y: hidden;
