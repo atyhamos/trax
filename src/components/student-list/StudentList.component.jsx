@@ -18,9 +18,7 @@ const StudentList = () => {
   const { currentTeacher } = useContext(TeachersContext)
   const [isAddingStudent, setIsAddingStudent] = useState(false)
   const [isRemovingStudent, setIsRemovingStudent] = useState(false)
-  const [currentSortOrder, setCurrentSortOrder] = useState(() => {
-    return null
-  })
+  const [currentSortOrder, setCurrentSortOrder] = useState(ascLevelOrder)
   const [sortedStudentsArray, setSortedStudentsArray] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
